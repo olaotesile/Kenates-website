@@ -55,7 +55,7 @@ export function Hero() {
                     className="flex-shrink-0 md:mr-20"
                 >
                     <div className="flex flex-col sm:flex-row gap-4">
-                        <Link href="#documentation" className="group inline-flex h-10 items-center justify-center rounded-full bg-gradient-to-r from-emerald-500 to-sky-500 px-6 text-xs font-medium text-white transition-all hover:opacity-90 hover:shadow-[0_0_20px_rgba(16,185,129,0.3)] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 md:h-12 md:px-8 md:text-sm">
+                        <Link href="/documentation" className="group inline-flex h-10 items-center justify-center rounded-full bg-gradient-to-r from-emerald-500 to-sky-500 px-6 text-xs font-medium text-white transition-all hover:opacity-90 hover:shadow-[0_0_20px_rgba(16,185,129,0.3)] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 md:h-12 md:px-8 md:text-sm">
                             Read Documentation
                             <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
                         </Link>

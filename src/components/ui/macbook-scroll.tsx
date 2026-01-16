@@ -8,9 +8,15 @@ export const MacbookScroll = ({
     title?: string | React.ReactNode;
 }) => {
     return (
-        <div className="flex flex-col items-center justify-center pt-20 pb-0 w-full perspective-[1200px] overflow-visible">
+        <div className="flex flex-col items-center justify-center pt-20 pb-0 w-full perspective-[1200px] overflow-visible relative">
+
+            {/* 2D OVERLAY: Text on laptop screen */}
+            <div className="absolute top-[5%] sm:top-[2%] md:top-[-2%] lg:top-[-5%] left-1/2 -translate-x-1/2 z-[100] flex items-center justify-center">
+                <p className="text-neutral-500 text-xs sm:text-sm md:text-lg lg:text-xl font-mono italic text-center drop-shadow-lg">Don't know what to put here. any ideas?</p>
+            </div>
+
             {/* 
-        DEVICE CONTAINER
+        DEVICE CONTAINER (3D Laptop - Visual Only)
       */}
             <div
                 className="relative transform-style-3d origin-center scale-[0.4] sm:scale-[0.5] md:scale-75 lg:scale-90"
@@ -38,40 +44,13 @@ export const MacbookScroll = ({
                             </div>
                         </div>
 
-                        {/* Display Panel */}
-                        <div className="absolute inset-[3px] top-[14px] bottom-[14px] left-[14px] right-[14px] bg-black overflow-hidden rounded-[4px] border border-white/5 relative">
-
+                        {/* Display Panel (Now just a black screen for the visual) */}
+                        <div className="absolute inset-[3px] top-[14px] bottom-[14px] left-[14px] right-[14px] bg-black rounded-[4px] border border-white/5 relative">
                             {/* WALLPAPER / DESKTOP */}
                             <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-indigo-900/40 via-[#050505] to-black z-0 opacity-50"></div>
-
                             {/* REFLECTIONS */}
                             <div className="absolute -top-[100%] -left-[50%] w-[200%] h-[200%] bg-gradient-to-br from-white/5 via-transparent to-transparent transform rotate-12 pointer-events-none z-50"></div>
                             <div className="absolute inset-0 bg-noise opacity-[0.03] pointer-events-none z-10"></div>
-
-                            {/* Content: Terminal Window */}
-                            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80%] h-[70%] bg-[#0c0c0c]/90 backdrop-blur-md rounded-lg shadow-2xl border border-white/10 flex flex-col z-20 overflow-hidden">
-                                {/* Title Bar */}
-                                <div className="h-8 bg-[#1a1a1a] flex items-center px-4 gap-2 border-b border-black">
-                                    <div className="w-3 h-3 rounded-full bg-[#ff5f57]"></div>
-                                    <div className="w-3 h-3 rounded-full bg-[#febc2e]"></div>
-                                    <div className="w-3 h-3 rounded-full bg-[#28c840]"></div>
-                                    <div className="ml-4 text-[10px] text-neutral-500 font-sans">kenate — -zsh</div>
-                                </div>
-                                {/* Terminal Body */}
-                                <div className="flex-1 p-4 font-mono text-xs md:text-sm text-neutral-300 overflow-hidden relative">
-                                    <div className="absolute inset-0 bg-black/50 z-[-1]"></div>
-                                    <p><span className="text-green-400">➜</span> <span className="text-blue-400">~</span> <span className="text-neutral-500">cd</span> kenate-core</p>
-                                    <p><span className="text-green-400">➜</span> <span className="text-blue-400">kenate-core</span> <span className="text-yellow-500">git:(main)</span> ./build.sh --release</p>
-                                    <div className="mt-2 text-neutral-500 opacity-80">
-                                        [INFO] Compiling HAL drivers... <span className="text-green-500">OK</span><br />
-                                        [INFO] Linking Real-Time Kernel... <span className="text-green-500">OK</span><br />
-                                        [INFO] Optimizing for ARM64... <span className="text-green-500">OK</span>
-                                    </div>
-                                    <p className="mt-2"><span className="text-green-400">➜</span> <span className="text-blue-400">kenate-core</span> <span className="text-yellow-500">git:(main)</span> ./run_diagnostics</p>
-                                    <p className="text-neutral-100">System Status: <span className="text-green-400 font-bold">ONLINE</span></p>
-                                    <div className="w-2.5 h-4 bg-neutral-500 animate-pulse mt-1"></div>
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </div>
