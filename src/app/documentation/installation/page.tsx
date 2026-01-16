@@ -30,7 +30,7 @@ export default function InstallationPage() {
                     Installation
                 </h1>
                 <p className="text-lg text-neutral-400 leading-relaxed max-w-2xl">
-                    Adding Kenate to your project is easier than explaining to your family what "inverse kinematics" means.
+                    Adding Kenate to your project is actually very easy.
                 </p>
             </div>
 
@@ -38,9 +38,9 @@ export default function InstallationPage() {
             <div className="space-y-4">
                 <h2 className="text-2xl font-semibold text-white">Prerequisites</h2>
                 <ul className="list-disc list-inside text-neutral-400 space-y-2 ml-4 marker:text-emerald-500">
-                    <li>Node.js 18 or higher (we use features that didn't exist in 2022)</li>
+                    <li>Node.js 18 or higher (we used the latest features)</li>
                     <li>React 18+ (Concurrency is key for robotics)</li>
-                    <li>A vague understanding of how servos work (optional, but helpful)</li>
+                    <li>An understanding of how servos work (optional, but helpful)</li>
                 </ul>
             </div>
 
@@ -85,8 +85,8 @@ export default function InstallationPage() {
 
                 <div className="bg-yellow-500/10 border border-yellow-500/20 rounded-lg p-4">
                     <p className="text-yellow-200/80 text-sm">
-                        <span className="font-bold text-yellow-500 block mb-1">Warning</span>
-                        Do not install this on a toaster. Kenate is powerful, but it cannot (yet) make toast.
+                        <span className="font-bold text-yellow-500 block mb-1">Note</span>
+                        Kenate is still in active development. Some APIs may change in future releases.
                     </p>
                 </div>
             </div>

@@ -11,8 +11,8 @@ export const MacbookScroll = ({
         <div className="flex flex-col items-center justify-center pt-20 pb-0 w-full perspective-[1200px] overflow-visible relative">
 
             {/* 2D OVERLAY: Text on laptop screen */}
-            <div className="absolute top-[5%] sm:top-[2%] md:top-[-2%] lg:top-[-5%] left-1/2 -translate-x-1/2 z-[100] flex items-center justify-center">
-                <p className="text-neutral-500 text-xs sm:text-sm md:text-lg lg:text-xl font-mono italic text-center drop-shadow-lg">Don't know what to put here. any ideas?</p>
+            <div className="absolute top-[28%] sm:top-[20%] md:top-[10%] lg:top-[5%] left-1/2 -translate-x-1/2 z-[100] flex items-center justify-center px-4">
+                <p className="text-neutral-500 text-[10px] sm:text-xs md:text-base lg:text-lg font-mono italic text-center drop-shadow-lg">Don't know what to put here. any ideas?</p>
             </div>
 
             {/* 
