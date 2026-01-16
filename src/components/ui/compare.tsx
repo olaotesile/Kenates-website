@@ -43,17 +43,36 @@ export const Compare = ({
         [slideMode, isDragging]
     );
 
+    const onTouchMove = useCallback(
+        (e: React.TouchEvent | TouchEvent) => {
+            if (!sliderRef.current) return;
+            if (slideMode === "hover" || (slideMode === "drag" && isDragging)) {
+                const rect = sliderRef.current.getBoundingClientRect();
+                const x = e.touches[0].clientX - rect.left;
+                const percent = (x / rect.width) * 100;
+                setSliderXPercent(Math.max(0, Math.min(100, percent)));
+            }
+        },
+        [slideMode, isDragging]
+    );
+
     const onMouseDown = useCallback(() => setIsDragging(true), []);
     const onMouseUp = useCallback(() => setIsDragging(false), []);
+    const onTouchStart = useCallback(() => setIsDragging(true), []);
+    const onTouchEnd = useCallback(() => setIsDragging(false), []);
 
     useEffect(() => {
         document.addEventListener("mouseup", onMouseUp);
         document.addEventListener("mousemove", onMouseMove);
+        document.addEventListener("touchend", onTouchEnd);
+        document.addEventListener("touchmove", onTouchMove);
         return () => {
             document.removeEventListener("mouseup", onMouseUp);
             document.removeEventListener("mousemove", onMouseMove);
+            document.removeEventListener("touchend", onTouchEnd);
+            document.removeEventListener("touchmove", onTouchMove);
         };
-    }, [onMouseUp, onMouseMove]);
+    }, [onMouseUp, onMouseMove, onTouchEnd, onTouchMove]);
 
     return (
         <div
@@ -61,9 +80,17 @@ export const Compare = ({
             className={cn("w-full h-[400px] overflow-hidden select-none relative rounded-2xl border border-white/10 bg-neutral-900", className)}
             style={{
                 cursor: slideMode === "drag" ? "grab" : "col-resize",
+                touchAction: "none",
             }}
             onMouseMove={(e) => slideMode === "hover" && onMouseMove(e)}
             onMouseDown={slideMode === "drag" ? onMouseDown : undefined}
+            onTouchStart={slideMode === "drag" ? onTouchStart : undefined}
+            onTouchMove={(e) => {
+                if (slideMode === "drag") {
+                    // touch-action: none handles scrolling, but we can prevent default if needed
+                }
+                onTouchMove(e);
+            }}
         >
             <AnimatePresence initial={false}>
                 <motion.div

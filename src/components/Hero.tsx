@@ -4,12 +4,16 @@ import { motion } from "framer-motion";
 import { ArrowRight, BookOpen } from "lucide-react";
 import Link from "next/link";
 import { MacbookScroll } from "@/components/ui/macbook-scroll";
+import { ShootingStars } from "@/components/ui/shooting-stars";
+import { StarsBackground } from "@/components/ui/stars-background";
 
 export function Hero() {
     return (
         <section className="relative min-h-[140vh] w-full flex flex-col pt-48 px-6 overflow-hidden bg-noise">
             {/* Subtle Grid Background */}
             <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px] pointer-events-none" />
+            <StarsBackground />
+            <ShootingStars />
 
             {/* Content Wrapper */}
             <div className="max-w-7xl mx-auto w-full z-10 flex flex-col md:flex-row items-start md:items-end justify-between gap-12 mb-8">
@@ -26,10 +30,14 @@ export function Hero() {
                         V1.0
                     </div>
 
-                    <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tighter text-white mb-6 relative">
+                    <h1 className="text-6xl md:text-6xl lg:text-7xl font-bold tracking-tighter text-white mb-6 relative">
                         <span className="relative z-10 mix-blend-difference">React, but for</span><br />
                         <span className="text-neutral-500 relative z-10">robotics</span>
                     </h1>
+
+                    <p className="text-neutral-400 text-sm md:text-base max-w-md mb-4 relative z-10">
+                        Kenate is a framework built for the engineering nerds to make their life way easier. I swear.
+                    </p>
 
                     <div className="flex items-end gap-6">
                         <p className="text-xs font-mono text-neutral-500 leading-relaxed">

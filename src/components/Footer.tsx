@@ -14,7 +14,7 @@ export function Footer() {
                     viewport={{ once: true }}
                 >
                     <Link
-                        href="https://github.com"
+                        href="https://github.com/olaotesile/Kenates-website"
                         target="_blank"
                         className="group relative inline-flex items-center gap-2 md:gap-3 px-6 py-3 md:px-8 md:py-4 bg-white/5 hover:bg-white/10 border border-white/10 rounded-full transition-all duration-300 hover:scale-105"
                     >
