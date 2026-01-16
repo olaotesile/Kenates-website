@@ -20,7 +20,7 @@ import {
 export default function Home() {
     const dockItems = [
         { title: "Home", icon: <IconHome className="h-full w-full text-neutral-300" />, href: "#" },
-        { title: "Docs", icon: <IconBooks className="h-full w-full text-neutral-300" />, href: "#documentation" },
+        { title: "Docs", icon: <IconBooks className="h-full w-full text-neutral-300" />, href: "/documentation" },
         { title: "Product", icon: <IconTerminal2 className="h-full w-full text-neutral-300" />, href: "#product" },
         { title: "Twitter", icon: <IconBrandTwitter className="h-full w-full text-neutral-300" />, href: "#" },
         { title: "GitHub", icon: <IconBrandGithub className="h-full w-full text-neutral-300" />, href: "https://github.com/olaotesile/Kenates-website" },
