@@ -9,14 +9,6 @@
 
 This project is the official landing page for **Kenate**, a declarative and reactive framework designed to simplify robotics programming. Built with **Next.js 16** and **Tailwind CSS**, it features a modern, dark-themed aesthetic with advanced interactive elements like 3D globes, floating docks, and code comparisons.
 
-## Features
-
--   **3D Globe Visualization**: Interactive WebGL globe using `react-three-fiber` and `three-globe`.
--   **Interactive Code Comparison**: A sliding comparison component demonstrating the difference between standard imperative code and Kenate's declarative components.
--   **Macbook Scroll Animation**: Smooth scroll-triggered product reveal.
--   **Floating Dock**: sleek, responsive navigation menu inspired by macOS.
--   **Performance Optimized**: Built on Next.js 16 with Turbopack for lightning-fast builds and page loads.
--   **Fully Responsive**: Meticulously crafted for mobile, tablet, and desktop experiences.
 
 ## Tech Stack
 
@@ -25,7 +17,7 @@ This project is the official landing page for **Kenate**, a declarative and reac
 -   **Animations**: [Framer Motion](https://www.framer.com/motion/)
 -   **3D Graphics**: [Three.js](https://threejs.org/) & [React Three Fiber](https://docs.pmnd.rs/react-three-fiber)
 -   **Icons**: [Lucide React](https://lucide.dev/)
--   **Language**: TypeScript
+-   **Language**: TypeScript. Please don't ask me why
 
 ## Getting Started
 
