@@ -19,23 +19,30 @@ const sidebarItems = [
     {
         title: "Core Concepts",
         items: [
-            { title: "The Kenate Philosophy", href: "/documentation/philosophy" },
-            { title: "Reactive Robotics", href: "/documentation/reactive" },
-            { title: "Hardware Hardware", href: "/documentation/hardware" },
+            { title: "Philosophy", href: "/documentation/philosophy" },
+            { title: "The Engine", href: "/documentation/reactive" },
+            { title: "Hardware Plugins", href: "/documentation/hardware" },
         ],
     },
     {
         title: "API Reference",
         items: [
-            { title: "Motors & Actuators", href: "/documentation/motors" },
-            { title: "Sensors", href: "/documentation/sensors" },
-            { title: "Logic Blocks", href: "/documentation/logic" },
+            { title: "Motor API", href: "/documentation/motors" },
+            { title: "Sensor API", href: "/documentation/sensors" },
+            { title: "Standard Library", href: "/documentation/logic" },
         ],
     },
     {
         title: "Tutorials",
         items: [
             { title: "Build a Hexapod", href: "/documentation/tutorials/hexapod" },
+        ],
+    },
+    {
+        title: "Tools",
+        items: [
+            { title: "CLI Commands", href: "/documentation/cli" },
+            { title: "Visualizer", href: "/documentation/visualizer" },
         ],
     },
 ];
@@ -124,7 +131,7 @@ export default function DocumentationLayout({
                 </aside>
 
                 {/* Main Content */}
-                <main className="flex-1 min-w-0 py-12 px-6 lg:px-12 xl:px-16 overflow-y-auto [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-track]:bg-neutral-950 [&::-webkit-scrollbar-thumb]:bg-neutral-700 [&::-webkit-scrollbar-thumb]:rounded-full hover:[&::-webkit-scrollbar-thumb]:bg-neutral-600">
+                <main className="flex-1 min-w-0 py-12 px-6 lg:px-12 xl:px-16 overflow-y-auto bg-neutral-900 [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-track]:bg-neutral-900 [&::-webkit-scrollbar-thumb]:bg-neutral-700 [&::-webkit-scrollbar-thumb]:rounded-full hover:[&::-webkit-scrollbar-thumb]:bg-neutral-600">
                     <div className="max-w-3xl mx-auto">
                         {children}
                     </div>
