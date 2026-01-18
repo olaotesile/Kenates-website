@@ -11,37 +11,47 @@ export const CodeComparison = () => {
     return (
         <div className="w-full mt-20 max-w-3xl mx-auto">
             <div className="mb-8 text-center md:text-left">
-                <h3 className="text-2xl font-semibold text-white mb-2">Servo Motor Control</h3>
+                <h3 className="text-2xl font-semibold text-white mb-2">When Your Robot Grows Up</h3>
                 <p className="text-neutral-400">
-                    See how a simple servo movement is implemented. The standard approach requires manual loops and state management, while Kenate handles it declaratively.
+                    Every robot starts simple. But what happens when you need 5 behaviors instead of 2? Traditional scripts become unreadable. Kenate stays clean.
                 </p>
             </div>
 
-            <div className="w-full h-[500px] border border-white/10 rounded-2xl bg-neutral-900/50 backdrop-blur-sm overflow-hidden">
+            <div className="w-full h-[520px] border border-white/10 rounded-2xl bg-neutral-900/50 backdrop-blur-sm overflow-hidden">
                 <Compare
                     firstContent={
                         <CodeBlock
-                            title="Standard Robotics Code"
-                            code={`// Initialize motor controller
-const motor = new MotorController(12, 13);
-motor.setMode('servo');
-motor.setMaxSpeed(100);
+                            title="main.py (The Monster)"
+                            code={`# "I'll just add one more elif..."
+state = "idle"
+timer = 0
 
-// Main control loop
-while (true) {
-    if (sensor.read() > 200) {
-        motor.moveTo(90);
-    } else {
-        motor.moveTo(0);
-    }
-    // Handle error states manually
-    if (motor.getError()) {
-        motor.reset();
-        logger.log("Error reset");
-    }
-    await delay(10);
-}`}
-                            language="cpp"
+while True:
+    if state == "idle":
+        stop_motors()
+        if button_pressed():
+            state = "patrol"
+    elif state == "patrol":
+        set_speed(50)
+        if get_distance() < 30:
+            state = "avoid"
+            timer = time.time()
+        if battery() < 20:
+            state = "return"
+    elif state == "avoid":
+        set_speed(-30)
+        turn(45)
+        if time.time() - timer > 2:
+            state = "patrol"
+    elif state == "return":
+        # TODO: implement this
+        pass
+    elif state == "charge":
+        # copy-pasted from avoid...
+        stop_motors()
+    
+    time.sleep(0.01)  # hope this works`}
+                            language="python"
                             lineNumbers
                             isBad
                             className="h-full w-full bg-neutral-900"
@@ -49,19 +59,28 @@ while (true) {
                     }
                     secondContent={
                         <CodeBlock
-                            title="Kenate Component"
-                            code={`// Declarative & Reactive
-<Motor 
-    pin={[12, 13]} 
-    mode="servo"
-    maxSpeed={100}
-    position={sensorValue > 200 ? 90 : 0}
-    onError={(err) => console.log(err)}
-/>
+                            title="states/ (One File Per Behavior)"
+                            code={`# Each state is its own file.
+# Test them independently.
+# Break nothing when adding new ones.
 
-// State handling is built-in.
-// No manual loops.`}
-                            language="jsx"
+# states/patrol.py
+class PatrolState(kenate.BaseState):
+    def on_update(self):
+        self.set_motor_speed(0, 50)
+        if self.get_distance(0) < 30:
+            self.change_state("Avoid")
+
+# states/avoid.py  
+class AvoidState(kenate.BaseState):
+    def on_enter(self):
+        self.start_time = self.get_time()
+    
+    def on_update(self):
+        self.set_motor_speed(0, -30)
+        if self.get_time() - self.start_time > 2:
+            self.change_state("Patrol")`}
+                            language="python"
                             lineNumbers
                             isKenate
                             className="h-full w-full"
@@ -72,9 +91,9 @@ while (true) {
                 />
             </div>
             <div className="flex justify-between mt-4 text-xs md:text-sm text-neutral-500 font-mono px-4">
-                <span>Standard (Old)</span>
-                <span>Drag slider to compare</span>
-                <span className="text-emerald-500">Kenate (New)</span>
+                <span className="text-red-400">Spaghetti (5 states = nightmare)</span>
+                <span>Drag to compare</span>
+                <span className="text-emerald-500">Kenate (5 states = 5 files)</span>
             </div>
         </div>
     );
@@ -110,7 +129,7 @@ const CodeBlock = ({
             className={cn(
                 "relative h-full flex flex-col overflow-hidden group border-r border-white/5",
                 isKenate
-                    ? "bg-[#09090b]" // Solid dark background to prevent bleed-through
+                    ? "bg-[#09090b]"
                     : "bg-neutral-900",
                 className
             )}
@@ -118,13 +137,13 @@ const CodeBlock = ({
             {/* Header */}
             <div className={cn(
                 "flex items-center justify-between px-4 py-3 border-b",
-                isKenate ? "border-emerald-500/20 bg-emerald-900/10" : "border-white/5 bg-white/5"
+                isKenate ? "border-emerald-500/20 bg-emerald-900/10" : "border-red-500/20 bg-red-900/10"
             )}>
                 <div className="flex items-center gap-2">
-                    <div className={cn("p-1.5 rounded-md", isKenate ? "bg-emerald-500/20" : "bg-neutral-800")}>
-                        <Terminal className={cn("w-3.5 h-3.5", isKenate ? "text-emerald-400" : "text-neutral-400")} />
+                    <div className={cn("p-1.5 rounded-md", isKenate ? "bg-emerald-500/20" : "bg-red-500/20")}>
+                        <Terminal className={cn("w-3.5 h-3.5", isKenate ? "text-emerald-400" : "text-red-400")} />
                     </div>
-                    <span className={cn("text-sm font-medium", isKenate ? "text-emerald-400" : "text-neutral-400")}>
+                    <span className={cn("text-sm font-medium", isKenate ? "text-emerald-400" : "text-red-400")}>
                         {title}
                     </span>
                 </div>
@@ -136,7 +155,7 @@ const CodeBlock = ({
             </div>
 
             {/* Code Content */}
-            <div className="p-4 overflow-x-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
+            <div className="p-4 flex-1 overflow-auto">
                 <pre className="font-mono text-xs md:text-sm leading-relaxed">
                     <code className="block">
                         {code.split("\n").map((line, i) => (
@@ -149,7 +168,9 @@ const CodeBlock = ({
                                 <span className={cn(
                                     "table-cell",
                                     isKenate ? "text-emerald-100" : "text-neutral-300",
-                                    line.trim().startsWith("//") && "text-neutral-500 italic"
+                                    line.trim().startsWith("#") && (isKenate ? "text-emerald-600 italic" : "text-red-400/60 italic"),
+                                    line.includes("TODO") && "text-yellow-500",
+                                    line.includes("hope") && "text-yellow-500"
                                 )}>
                                     {line}
                                 </span>
@@ -164,11 +185,11 @@ const CodeBlock = ({
                 {isKenate ? (
                     <div className="flex items-center gap-1.5 px-2 py-1 rounded-md bg-emerald-500/10 border border-emerald-500/20 text-[10px] font-medium text-emerald-400">
                         <Check className="w-3 h-3" />
-                        Reactive
+                        Modular
                     </div>
                 ) : (
-                    <div className="flex items-center gap-1.5 px-2 py-1 rounded-md bg-neutral-800 border border-white/5 text-[10px] font-medium text-neutral-500">
-                        Imperative
+                    <div className="flex items-center gap-1.5 px-2 py-1 rounded-md bg-red-500/10 border border-red-500/20 text-[10px] font-medium text-red-400">
+                        Coupled
                     </div>
                 )}
             </div>

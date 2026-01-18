@@ -11,7 +11,7 @@ export default function DocumentationPage() {
                     What is Kenate?
                 </h1>
                 <p className="text-lg text-neutral-400 leading-relaxed">
-                    Kenate is <span className="text-white font-medium">"React for Robots"</span> — a framework that helps you build complex robot behaviors by breaking them down into small, isolated <span className="text-emerald-400">States</span>, not one giant script.
+                    Kenate is <span className="text-white font-medium">"React for Robots"</span>: a framework that helps you build complex robot behaviors by breaking them down into small, isolated <span className="text-emerald-400">States</span>, not one giant script.
                 </p>
             </div>
 
@@ -35,12 +35,12 @@ export default function DocumentationPage() {
             <div className="space-y-4">
                 <h2 className="text-2xl font-semibold text-white">The Problem</h2>
                 <p className="text-neutral-400 leading-relaxed">
-                    Traditional robotics code is <span className="text-red-400">one giant script</span>. You write a massive <code className="text-red-400 bg-red-500/10 px-1 py-0.5 rounded">main.py</code> with a <code className="text-red-400 bg-red-500/10 px-1 py-0.5 rounded">while True:</code> loop that handles everything — sensor reading, motor control, state transitions, error handling. It gets messy fast.
+                    Traditional robotics code is <span className="text-red-400">one giant script</span>. You write a massive <code className="text-red-400 bg-red-500/10 px-1 py-0.5 rounded">main.py</code> with a <code className="text-red-400 bg-red-500/10 px-1 py-0.5 rounded">while True:</code> loop that handles everything: sensor reading, motor control, state transitions, error handling. One typo and the whole thing falls over.
                 </p>
                 <h2 className="text-2xl font-semibold text-white mt-6">The Solution</h2>
                 <p className="text-neutral-400 leading-relaxed">
-                    Kenate forces you to think in <span className="text-emerald-400 font-medium">States</span>. Each behavior is a separate Python class — <code className="text-emerald-400 bg-emerald-500/10 px-1 py-0.5 rounded">PatrolState</code>, <code className="text-emerald-400 bg-emerald-500/10 px-1 py-0.5 rounded">AlertState</code>, <code className="text-emerald-400 bg-emerald-500/10 px-1 py-0.5 rounded">IdleState</code>.
-                    Each state only cares about itself. The Kenate Engine handles switching between them.
+                    Kenate forces you to think in <span className="text-emerald-400 font-medium">States</span>. Each behavior is a separate Python class: <code className="text-emerald-400 bg-emerald-500/10 px-1 py-0.5 rounded">PatrolState</code>, <code className="text-emerald-400 bg-emerald-500/10 px-1 py-0.5 rounded">AlertState</code>, <code className="text-emerald-400 bg-emerald-500/10 px-1 py-0.5 rounded">IdleState</code>.
+                    Each state only cares about itself. The Kenate Engine handles the rest.
                 </p>
             </div>
 

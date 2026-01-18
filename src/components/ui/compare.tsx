@@ -80,7 +80,6 @@ export const Compare = ({
             className={cn("w-full h-[400px] overflow-hidden select-none relative rounded-2xl border border-white/10 bg-neutral-900", className)}
             style={{
                 cursor: slideMode === "drag" ? "grab" : "col-resize",
-                touchAction: "none",
             }}
             onMouseMove={(e) => slideMode === "hover" && onMouseMove(e)}
             onMouseDown={slideMode === "drag" ? onMouseDown : undefined}
@@ -92,13 +91,13 @@ export const Compare = ({
                 onTouchMove(e);
             }}
         >
+            {/* Slider Line (highest z-index, no pointer events) */}
             <AnimatePresence initial={false}>
                 <motion.div
-                    className="h-full w-px absolute top-0 m-auto z-30 bg-gradient-to-b from-transparent from-[5%] via-indigo-500 to-transparent to-[95%]"
+                    className="h-full w-px absolute top-0 m-auto z-50 bg-gradient-to-b from-transparent from-[5%] via-indigo-500 to-transparent to-[95%] pointer-events-none"
                     style={{
                         left: `${sliderXPercent}%`,
                         top: "0",
-                        zIndex: 40,
                     }}
                     transition={{ type: "tween", ease: "linear", duration: 0 }}
                 >
@@ -106,39 +105,41 @@ export const Compare = ({
                     <div className="w-10 h-1/2 [mask-image:radial-gradient(50px_at_left,white,transparent)] absolute top-1/2 -translate-y-1/2 left-0 bg-gradient-to-r from-cyan-400 via-transparent to-transparent z-10 opacity-100" />
                     <div className="w-10 h-3/4 [mask-image:radial-gradient(50px_at_left,white,transparent)] absolute top-1/2 -translate-y-1/2 left-0 bg-gradient-to-r from-teal-400 via-transparent to-transparent z-10 opacity-100" />
                     {showHandlebar && (
-                        <div className="h-5 w-5 rounded-md top-1/2 -translate-y-1/2 bg-white z-30 -right-2.5 absolute flex items-center justify-center shadow-[0px_-1px_0px_0px_#FFFFFF40]">
+                        <div className="h-5 w-5 rounded-md top-1/2 -translate-y-1/2 bg-white z-30 -right-2.5 absolute flex items-center justify-center shadow-[0px_-1px_0px_0px_#FFFFFF40] pointer-events-auto cursor-grab">
                             <Sparkles className="h-3 w-3 text-black" />
                         </div>
                     )}
                 </motion.div>
             </AnimatePresence>
-            <div className="overflow-hidden w-full h-full relative z-20 pointer-events-none">
-                <AnimatePresence initial={false}>
-                    {firstContent ? (
-                        <motion.div
-                            className={cn(
-                                "absolute inset-0 z-20 rounded-2xl flex-shrink-0 w-full h-full select-none overflow-hidden",
-                                firstContentClassName
-                            )}
-                            style={{
-                                clipPath: `inset(0 ${100 - sliderXPercent}% 0 0)`,
-                            }}
-                            transition={{ type: "tween", ease: "linear", duration: 0 }}
-                        >
-                            {firstContent}
-                        </motion.div>
-                    ) : null}
-                </AnimatePresence>
-            </div>
+
+            {/* Second Content (background, lower z-index but receives events in its visible area) */}
             <AnimatePresence initial={false}>
                 {secondContent ? (
                     <motion.div
                         className={cn(
-                            "absolute top-0 left-0 z-[19] rounded-2xl w-full h-full select-none overflow-hidden",
+                            "absolute top-0 left-0 z-10 rounded-2xl w-full h-full select-none",
                             secondContentClassName
                         )}
                     >
                         {secondContent}
+                    </motion.div>
+                ) : null}
+            </AnimatePresence>
+
+            {/* First Content (foreground, clipped to show only left portion) */}
+            <AnimatePresence initial={false}>
+                {firstContent ? (
+                    <motion.div
+                        className={cn(
+                            "absolute inset-0 z-20 rounded-2xl flex-shrink-0 w-full h-full select-none",
+                            firstContentClassName
+                        )}
+                        style={{
+                            clipPath: `inset(0 ${100 - sliderXPercent}% 0 0)`,
+                        }}
+                        transition={{ type: "tween", ease: "linear", duration: 0 }}
+                    >
+                        {firstContent}
                     </motion.div>
                 ) : null}
             </AnimatePresence>

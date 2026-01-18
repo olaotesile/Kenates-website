@@ -6,20 +6,21 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 
 export default function InstallationPage() {
-    const [copied, setCopied] = useState(false);
-    const [packageManager, setPackageManager] = useState<"npm" | "yarn" | "pnpm">("npm");
+    const [copied, setCopied] = useState<number | null>(null);
 
-    const commands = {
-        npm: "npm install kenate-core react-three-fiber three",
-        yarn: "yarn add kenate-core react-three-fiber three",
-        pnpm: "pnpm add kenate-core react-three-fiber three",
+    const copyCommand = (cmd: string, index: number) => {
+        navigator.clipboard.writeText(cmd);
+        setCopied(index);
+        setTimeout(() => setCopied(null), 2000);
     };
 
-    const copyCommand = () => {
-        navigator.clipboard.writeText(commands[packageManager]);
-        setCopied(true);
-        setTimeout(() => setCopied(false), 2000);
-    };
+    const steps = [
+        { cmd: "git clone https://github.com/olaotesile/kenate.git", desc: "Download the source code" },
+        { cmd: "cd kenate", desc: "Enter the project folder" },
+        { cmd: "mkdir build && cd build", desc: "Create the build directory" },
+        { cmd: 'cmake -G "Visual Studio 17 2022" ..', desc: "Configure the build" },
+        { cmd: "cmake --build . --config Release", desc: "Compile the C++ Engine" },
+    ];
 
     return (
         <div className="space-y-10 pb-20">
@@ -30,7 +31,7 @@ export default function InstallationPage() {
                     Installation
                 </h1>
                 <p className="text-lg text-neutral-400 leading-relaxed max-w-2xl">
-                    Adding Kenate to your project is actually very easy.
+                    Kenate requires compiling the C++ Engine once. After that, you write pure Python. Promise.
                 </p>
             </div>
 
@@ -38,80 +39,82 @@ export default function InstallationPage() {
             <div className="space-y-4">
                 <h2 className="text-2xl font-semibold text-white">Prerequisites</h2>
                 <ul className="list-disc list-inside text-neutral-400 space-y-2 ml-4 marker:text-emerald-500">
-                    <li>Node.js 18 or higher (we used the latest features)</li>
-                    <li>React 18+ (Concurrency is key for robotics)</li>
-                    <li>An understanding of how servos work (optional, but helpful)</li>
+                    <li><span className="text-white font-medium">Windows:</span> Visual Studio 2022 (Community Edition is free)</li>
+                    <li><span className="text-white font-medium">Python:</span> Version 3.8 or newer</li>
+                    <li><span className="text-white font-medium">CMake:</span> A tool to build C++ projects</li>
                 </ul>
             </div>
 
-            {/* Installation Block */}
+            {/* Installation Steps */}
             <div className="space-y-4">
-                <h2 className="text-2xl font-semibold text-white">Install Package</h2>
+                <h2 className="text-2xl font-semibold text-white">Step-by-Step Setup</h2>
 
-                <div className="rounded-xl border border-white/10 bg-[#0A0A0A] overflow-hidden">
-                    {/* Tabs */}
-                    <div className="flex border-b border-white/5">
-                        {(["npm", "yarn", "pnpm"] as const).map((pm) => (
-                            <button
-                                key={pm}
-                                onClick={() => setPackageManager(pm)}
-                                className={cn(
-                                    "px-6 py-3 text-sm font-medium transition-colors border-b-2",
-                                    packageManager === pm
-                                        ? "border-emerald-500 text-white bg-white/5"
-                                        : "border-transparent text-neutral-500 hover:text-neutral-300 hover:bg-white/[0.02]"
-                                )}
-                            >
-                                {pm}
-                            </button>
-                        ))}
-                    </div>
-
-                    {/* Command */}
-                    <div className="p-6 flex items-center justify-between group">
-                        <div className="font-mono text-sm text-neutral-300">
-                            <span className="text-emerald-500 select-none">$ </span>
-                            {commands[packageManager]}
+                <div className="space-y-3">
+                    {steps.map((step, i) => (
+                        <div key={i} className="rounded-xl border border-white/10 bg-[#0A0A0A] overflow-hidden">
+                            <div className="flex items-center justify-between px-4 py-2 border-b border-white/5 bg-white/[0.02]">
+                                <span className="text-xs text-neutral-500 font-mono">Step {i + 1}: {step.desc}</span>
+                            </div>
+                            <div className="p-4 flex items-center justify-between group">
+                                <div className="font-mono text-sm text-neutral-300">
+                                    <span className="text-emerald-500 select-none">$ </span>
+                                    {step.cmd}
+                                </div>
+                                <button
+                                    onClick={() => copyCommand(step.cmd, i)}
+                                    className="p-2 rounded-md hover:bg-white/10 text-neutral-500 hover:text-white transition-colors"
+                                    title="Copy to clipboard"
+                                >
+                                    {copied === i ? <Check size={18} className="text-emerald-500" /> : <Copy size={18} />}
+                                </button>
+                            </div>
                         </div>
-                        <button
-                            onClick={copyCommand}
-                            className="p-2 rounded-md hover:bg-white/10 text-neutral-500 hover:text-white transition-colors relative"
-                            title="Copy to clipboard"
-                        >
-                            {copied ? <Check size={18} className="text-emerald-500" /> : <Copy size={18} />}
-                        </button>
-                    </div>
+                    ))}
                 </div>
 
-                <div className="bg-yellow-500/10 border border-yellow-500/20 rounded-lg p-4">
-                    <p className="text-yellow-200/80 text-sm">
-                        <span className="font-bold text-yellow-500 block mb-1">Note</span>
-                        Kenate is still in active development. Some APIs may change in future releases.
+                <div className="bg-emerald-500/10 border border-emerald-500/20 rounded-lg p-4 mt-6">
+                    <p className="text-emerald-200/80 text-sm">
+                        <span className="font-bold text-emerald-400 block mb-1">Done!</span>
+                        The C++ Engine is now compiled. You'll find <code className="bg-emerald-500/20 px-1 rounded">kenate_bindings.pyd</code> in your build folder.
                     </p>
                 </div>
             </div>
 
-            {/* Configuration */}
+            {/* Create Your First Project */}
             <div className="space-y-4">
-                <h2 className="text-2xl font-semibold text-white">Setup Provider</h2>
-                <p className="text-neutral-400">Wrap your application with the <code className="text-emerald-400 bg-emerald-500/10 px-1 py-0.5 rounded">KenateRoot</code> provider.</p>
+                <h2 className="text-2xl font-semibold text-white">Create Your First Project</h2>
+                <p className="text-neutral-400">Use the CLI to scaffold a new robot project:</p>
 
-                <div className="rounded-lg overflow-hidden border border-white/10 bg-[#0A0A0A] p-6 overflow-x-auto">
-                    <pre className="font-mono text-sm leading-relaxed">
-                        <code className="text-neutral-300">
-                            <span className="text-pink-500">import</span> {"{ KenateRoot }"} <span className="text-pink-500">from</span> <span className="text-green-400">'kenate-core'</span>;<br /><br />
-                            <span className="text-pink-500">export default function</span> <span className="text-blue-400">App</span>() {"{"}<br />
-                            &nbsp;&nbsp;<span className="text-pink-500">return</span> (<br />
-                            &nbsp;&nbsp;&nbsp;&nbsp;&lt;<span className="text-emerald-400">KenateRoot</span> <span className="text-purple-400">port</span>=<span className="text-green-400">"COM3"</span> <span className="text-purple-400">baudRate</span>={9600}&gt;<br />
-                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{/* Your Robot Components Here */}<br />
-                            &nbsp;&nbsp;&nbsp;&nbsp;&lt;/<span className="text-emerald-400">KenateRoot</span>&gt;<br />
-                            &nbsp;&nbsp;);<br />
-                            {"}"}
-                        </code>
-                    </pre>
+                <div className="rounded-xl border border-white/10 bg-[#0A0A0A] overflow-hidden">
+                    <div className="p-4 flex items-center justify-between group">
+                        <div className="font-mono text-sm text-neutral-300">
+                            <span className="text-emerald-500 select-none">$ </span>
+                            kenate init my_robot
+                        </div>
+                        <button
+                            onClick={() => copyCommand("kenate init my_robot", 99)}
+                            className="p-2 rounded-md hover:bg-white/10 text-neutral-500 hover:text-white transition-colors"
+                            title="Copy to clipboard"
+                        >
+                            {copied === 99 ? <Check size={18} className="text-emerald-500" /> : <Copy size={18} />}
+                        </button>
+                    </div>
                 </div>
+
+                <p className="text-neutral-500 text-sm">
+                    This creates a project folder with <code className="text-emerald-400 bg-emerald-500/10 px-1 py-0.5 rounded">hardware.toml</code>,
+                    <code className="text-emerald-400 bg-emerald-500/10 px-1 py-0.5 rounded ml-1">main.py</code>, and a
+                    <code className="text-emerald-400 bg-emerald-500/10 px-1 py-0.5 rounded ml-1">states/</code> folder.
+                </p>
             </div>
 
+            {/* Note */}
+            <div className="bg-yellow-500/10 border border-yellow-500/20 rounded-lg p-4">
+                <p className="text-yellow-200/80 text-sm">
+                    <span className="font-bold text-yellow-500 block mb-1">Note</span>
+                    Kenate is still in active development. Some APIs may change in future releases.
+                </p>
+            </div>
 
             {/* Navigation */}
             <div className="pt-10 border-t border-white/5">
