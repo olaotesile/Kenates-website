@@ -14,7 +14,7 @@ const outfit = Outfit({
 
 export const metadata: Metadata = {
   title: "Kenate - React, but for Robotics",
-  description: "If you understand why react is more efficient than pure html and javasript, you'll understand how kenate is better for robotics.",
+  description: "If you understand why react is more efficient than pure html and javasript, then you'll understand how kenate is better for robotics.",
 };
 
 export default function RootLayout({
