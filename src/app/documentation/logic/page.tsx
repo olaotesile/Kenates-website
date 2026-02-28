@@ -12,150 +12,85 @@ export default function LogicPage() {
                     Standard Library
                 </h1>
                 <p className="text-lg text-neutral-400 leading-relaxed max-w-2xl">
-                    Pre-built states for common tasks. Import from <code className="text-emerald-400 bg-emerald-500/10 px-1 py-0.5 rounded">kenate.stdlib</code>. Why reinvent the wheel?
+                    Pre-built logic modules for the most common robotic behaviors. Import from <code className="text-emerald-400 bg-emerald-500/10 px-1 py-0.5 rounded">kenate.lib</code>.
                 </p>
             </div>
 
-            {/* Overview */}
-            <div className="space-y-4">
-                <h2 className="text-2xl font-semibold text-white">Available States</h2>
+            {/* Modules */}
+            <div className="space-y-8">
+                {/* Motion Lib */}
+                <div className="space-y-4">
+                    <h2 className="text-2xl font-semibold text-white">kenate.lib.Motion</h2>
+                    <p className="text-neutral-400">High-level movement commands that handle ramp-up and ramp-down internally.</p>
+                    <div className="grid gap-3">
+                        <div className="p-4 rounded-xl border border-white/5 bg-white/[0.02]">
+                            <code className="text-emerald-400 font-mono text-sm">move_smooth(distance, speed)</code>
+                            <p className="text-xs text-neutral-500 mt-1">Moves a set distance with s-curve acceleration.</p>
+                        </div>
+                        <div className="p-4 rounded-xl border border-white/5 bg-white/[0.02]">
+                            <code className="text-emerald-400 font-mono text-sm">rotate_fixed(angle, speed)</code>
+                            <p className="text-xs text-neutral-500 mt-1">Rotates the robot on its axis using IMU feedback.</p>
+                        </div>
+                    </div>
+                </div>
+                {/* Standard Library Catalog */}
+                <div className="space-y-12">
+                    <div className="grid gap-6">
+                        <LibraryItem
+                            title="WaitState"
+                            signature="WaitState(duration)"
+                            purpose="Provides precision timed pauses without blocking the control loop."
+                        />
+                        <LibraryItem
+                            title="SequenceState"
+                            signature="SequenceState([states])"
+                            purpose="Chains multiple behaviors into a single autonomous flow."
+                        />
+                        <LibraryItem
+                            title="PIDState"
+                            signature="PIDState(p, i, d, t)"
+                            purpose="Industry-standard math for smooth, precise motor positioning."
+                        />
+                        <LibraryItem
+                            title="WatchdogState"
+                            signature="WatchdogState(timeout)"
+                            purpose="A background safety guardian that monitors system health."
+                        />
+                        <LibraryItem
+                            title="BlackBoxLogger"
+                            signature="BlackBoxLogger()"
+                            purpose="Captures high-frequency (1000Hz) telemetry data for post-mission analysis."
+                        />
+                        <LibraryItem
+                            title="TerminalVisualizer"
+                            signature="TerminalVisualizer(id)"
+                            purpose="A live-updating console dashboard for real-time mission monitoring."
+                        />
+                    </div>
+                </div>
 
-                <div className="rounded-xl border border-white/10 bg-[#0A0A0A] overflow-hidden">
-                    <table className="w-full text-sm">
-                        <thead className="bg-white/5 border-b border-white/10">
-                            <tr>
-                                <th className="text-left px-4 py-3 text-neutral-400 font-medium">State</th>
-                                <th className="text-left px-4 py-3 text-neutral-400 font-medium">Purpose</th>
-                            </tr>
-                        </thead>
-                        <tbody className="divide-y divide-white/5">
-                            <tr>
-                                <td className="px-4 py-3 font-mono text-emerald-400">WaitState</td>
-                                <td className="px-4 py-3 text-neutral-300">Pause for a duration</td>
-                            </tr>
-                            <tr>
-                                <td className="px-4 py-3 font-mono text-emerald-400">SequenceState</td>
-                                <td className="px-4 py-3 text-neutral-300">Chain states in order</td>
-                            </tr>
-                            <tr>
-                                <td className="px-4 py-3 font-mono text-emerald-400">ParallelState</td>
-                                <td className="px-4 py-3 text-neutral-300">Run states simultaneously</td>
-                            </tr>
-                            <tr>
-                                <td className="px-4 py-3 font-mono text-emerald-400">StopState</td>
-                                <td className="px-4 py-3 text-neutral-300">Emergency shutdown</td>
-                            </tr>
-                            <tr>
-                                <td className="px-4 py-3 font-mono text-emerald-400">LogState</td>
-                                <td className="px-4 py-3 text-neutral-300">Debug logging</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                {/* Patterns */}
+                <div className="space-y-6 pt-10 border-t border-white/5">
+                    <h2 className="text-2xl font-semibold text-white font-mono">Advanced Pattern: Observer Watchdog</h2>
+                    <div className="space-y-4 text-neutral-400 leading-relaxed">
+                        <p>
+                            Instead of writing safety logic inside every state, instantiate a <code className="text-emerald-400">WatchdogState</code> as an attribute of your primary Task state. This separates the <span className="text-white underline">Mission Goal</span> from the <span className="text-white underline">System Safety</span>.
+                        </p>
+                    </div>
                 </div>
             </div>
 
-            {/* WaitState */}
-            <div className="space-y-4">
-                <h2 className="text-2xl font-semibold text-white">
-                    <code className="text-blue-400">WaitState(duration, next_state)</code>
-                </h2>
-                <p className="text-neutral-400">
-                    Do nothing for a specified duration. Optionally transition to another state when done. Sometimes waiting is the correct thing to do.
-                </p>
-                <div className="rounded-lg border border-white/10 bg-[#0A0A0A] p-4">
+            {/* Example */}
+            <div className="space-y-4 pt-6">
+                <h2 className="text-2xl font-semibold text-white">The Pattern</h2>
+                <div className="rounded-lg border border-white/10 bg-[#0A0A0A] p-4 overflow-x-auto">
                     <pre className="font-mono text-sm text-neutral-300">
-                        {`from kenate.stdlib import WaitState
+                        {`from kenate.lib import Motion, Safety
 
-# Wait 2 seconds, then go to Patrol
-engine.register_state("Wait", WaitState(2.0, "Patrol"))
-
-# Wait 5 seconds, then return to previous state
-engine.register_state("Pause", WaitState(5.0))`}
-                    </pre>
-                </div>
-            </div>
-
-            {/* SequenceState */}
-            <div className="space-y-4">
-                <h2 className="text-2xl font-semibold text-white">
-                    <code className="text-purple-400">SequenceState(states)</code>
-                </h2>
-                <p className="text-neutral-400">
-                    Execute a list of states in order. Great for scripted behaviors and not losing track of what comes next.
-                </p>
-                <div className="rounded-lg border border-white/10 bg-[#0A0A0A] p-4">
-                    <pre className="font-mono text-sm text-neutral-300">
-                        {`from kenate.stdlib import SequenceState
-
-# Pick up object: move to it, grab it, return
-pickup_sequence = SequenceState([
-    MoveToObjectState(),
-    GrabState(),
-    ReturnHomeState()
-])
-
-engine.register_state("Pickup", pickup_sequence)`}
-                    </pre>
-                </div>
-            </div>
-
-            {/* ParallelState */}
-            <div className="space-y-4">
-                <h2 className="text-2xl font-semibold text-white">
-                    <code className="text-yellow-400">ParallelState(states)</code>
-                </h2>
-                <p className="text-neutral-400">
-                    Run multiple states at the same time. Useful for multitasking. Walk and chew gum simultaneously.
-                </p>
-                <div className="rounded-lg border border-white/10 bg-[#0A0A0A] p-4">
-                    <pre className="font-mono text-sm text-neutral-300">
-                        {`from kenate.stdlib import ParallelState
-
-# Move AND scan at the same time
-patrol = ParallelState([
-    MoveForwardState(),
-    ScanForTargetsState()
-])
-
-engine.register_state("Patrol", patrol)`}
-                    </pre>
-                </div>
-            </div>
-
-            {/* StopState */}
-            <div className="space-y-4">
-                <h2 className="text-2xl font-semibold text-white">
-                    <code className="text-red-400">StopState()</code>
-                </h2>
-                <p className="text-neutral-400">
-                    Emergency shutdown. Sets all motors to 0 and locks the robot. Use sparingly. Hopefully never.
-                </p>
-                <div className="rounded-lg border border-white/10 bg-[#0A0A0A] p-4">
-                    <pre className="font-mono text-sm text-neutral-300">
-                        {`from kenate.stdlib import StopState
-
-engine.register_state("EmergencyStop", StopState())
-
-# Trigger from any state:
-# self.change_state("EmergencyStop")`}
-                    </pre>
-                </div>
-            </div>
-
-            {/* LogState */}
-            <div className="space-y-4">
-                <h2 className="text-2xl font-semibold text-white">
-                    <code className="text-neutral-400">LogState(message, level)</code>
-                </h2>
-                <p className="text-neutral-400">
-                    One-shot state that logs a message and immediately returns to the previous state. Handy for debugging.
-                </p>
-                <div className="rounded-lg border border-white/10 bg-[#0A0A0A] p-4">
-                    <pre className="font-mono text-sm text-neutral-300">
-                        {`from kenate.stdlib import LogState
-
-# Debug your state chains
-engine.register_state("Debug", LogState("Entered debug point", "INFO"))`}
+class PatrolState(kenate.BaseState):
+    def on_update(self):
+        # Use lib instead of raw motor math
+        Motion.move_smooth(1.0, 0.5)`}
                     </pre>
                 </div>
             </div>
@@ -170,15 +105,29 @@ engine.register_state("Debug", LogState("Entered debug point", "INFO"))`}
                             Sensor API
                         </div>
                     </Link>
-                    <Link href="/documentation/cli" className="group flex flex-col items-end gap-2 text-right">
+                    <Link href="/documentation/visualizer" className="group flex flex-col items-end gap-2 text-right">
                         <span className="text-neutral-500 text-xs font-mono">Next</span>
                         <div className="flex items-center gap-2 text-emerald-400 font-medium group-hover:text-emerald-300 transition-colors">
-                            CLI Commands
+                            Visualizer
                             <ArrowRight size={18} />
                         </div>
                     </Link>
                 </div>
             </div>
+        </div>
+    );
+}
+
+function LibraryItem({ title, signature, purpose }: { title: string; signature: string; purpose: string }) {
+    return (
+        <div className="p-5 rounded-xl border border-white/5 bg-white/[0.02] flex flex-col gap-2">
+            <div className="flex items-center justify-between">
+                <h3 className="text-lg font-semibold text-white">{title}</h3>
+                <code className="text-xs text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded font-mono">{signature}</code>
+            </div>
+            <p className="text-sm text-neutral-400 leading-relaxed font-mono italic">
+                {purpose}
+            </p>
         </div>
     );
 }

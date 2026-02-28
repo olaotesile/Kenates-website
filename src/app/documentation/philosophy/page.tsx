@@ -12,51 +12,37 @@ export default function PhilosophyPage() {
                     Philosophy
                 </h1>
                 <p className="text-lg text-neutral-400 leading-relaxed max-w-2xl">
-                    Kenate is built on one core belief: <span className="text-white font-medium">robotics code should be modular, not monolithic.</span>
+                    Kenate is built on one core belief: <span className="text-white font-medium">robotics code should be modular, not monolithic.</span> We replace scripts with specialist behaviors.
                 </p>
             </div>
 
-            {/* The Problem */}
-            <div className="space-y-4">
-                <h2 className="text-2xl font-semibold text-white">The Problem with Traditional Robotics</h2>
-                <p className="text-neutral-400 leading-relaxed">
-                    Most robot code looks like this: one giant <code className="text-red-400 bg-red-500/10 px-1 py-0.5 rounded">main.py</code> file
-                    with a massive <code className="text-red-400 bg-red-500/10 px-1 py-0.5 rounded">while True:</code> loop.
-                    Everything is jammed together: sensor reading, motor control, state transitions, error handling. It's a mess.
-                </p>
-                <p className="text-neutral-400 leading-relaxed">
-                    When something breaks, you're debugging the entire robot. When you want to add a feature, you risk breaking everything else. Been there, debugged that.
-                </p>
-            </div>
-
-            {/* The Solution */}
-            <div className="space-y-4">
-                <h2 className="text-2xl font-semibold text-white">The Kenate Solution: States</h2>
-                <p className="text-neutral-400 leading-relaxed">
-                    Kenate forces you to think in <span className="text-emerald-400 font-medium">States</span>.
-                    Each behavior your robot can perform is a separate, isolated Python class.
-                </p>
-
-                <div className="grid md:grid-cols-2 gap-4 mt-6">
-                    <div className="rounded-xl border border-red-500/20 bg-red-500/5 p-5">
-                        <h4 className="text-red-400 font-medium mb-2">Traditional</h4>
-                        <p className="text-neutral-400 text-sm">
-                            One file. One loop. Everything mixed together. Change one thing, break another.
-                        </p>
-                    </div>
-                    <div className="rounded-xl border border-emerald-500/20 bg-emerald-500/5 p-5">
-                        <h4 className="text-emerald-400 font-medium mb-2">Kenate</h4>
-                        <p className="text-neutral-400 text-sm">
-                            Many small files. Each state is isolated. Fix <code className="bg-emerald-500/10 px-1 rounded">PatrolState</code> without touching <code className="bg-emerald-500/10 px-1 rounded">AlertState</code>.
+            {/* Atomic States */}
+            <div className="space-y-6">
+                <h2 className="text-2xl font-semibold text-white">The Atomic State Paradigm</h2>
+                <div className="space-y-4 text-neutral-400 leading-relaxed">
+                    <p>
+                        Kenate represents a paradigm shift. It is the first framework to treat robotic behavior as a set of isolated, high-performance modules. By replacing "scripts" with <span className="text-emerald-400 font-mono">"Atomic States,"</span> Kenate allows for the creation of autonomous systems that are modular by design and impossible to break by accident.
+                    </p>
+                    <div className="bg-emerald-500/5 border border-emerald-500/10 rounded-xl p-6">
+                        <h4 className="text-emerald-400 font-medium mb-2">Definition: Atomic State</h4>
+                        <p className="text-sm">
+                            A behavioral module that performs <span className="text-white">exactly one task perfectly</span>. Never build a State that does two major jobs. If a robot needs to move and clean, build two states.
                         </p>
                     </div>
                 </div>
             </div>
 
-            {/* Core Principles */}
+            {/* Why Kenate? */}
+            <div className="space-y-6 pt-6 border-t border-white/5">
+                <h2 className="text-2xl font-semibold text-white">Why Kenate?</h2>
+                <p className="text-neutral-400 leading-relaxed">
+                    Traditional robotic software relies on monolithic control loops. As systems evolve, these become "Spaghetti Logic"—endless chains of if-else statements. Kenate enforces a disciplined lifecycle: <span className="text-white font-medium">Init, Run, Analyze.</span>
+                </p>
+            </div>
+
+            {/* Principles */}
             <div className="space-y-6">
                 <h2 className="text-2xl font-semibold text-white">Core Principles</h2>
-
                 <div className="space-y-4">
                     <PrincipleCard
                         title="Modularity"
@@ -64,49 +50,34 @@ export default function PhilosophyPage() {
                     />
                     <PrincipleCard
                         title="Hybrid Performance"
-                        description="You write easy Python. Under the hood, a C++ Engine runs at 1000Hz, ensuring precise timing for smooth robot motion. Best of both worlds."
+                        description="Write in easy Python; execute in high-speed C++. The 1000Hz Kernel ensures precise timing for smooth robot motion."
                     />
                     <PrincipleCard
                         title="Determinism"
-                        description="The Engine guarantees your on_update() runs at exact intervals. No more guessing about timing or missed sensor readings. Predictable is good."
-                    />
-                    <PrincipleCard
-                        title="Separation of Concerns"
-                        description="Your Python code handles 'what to do'. The C++ Engine handles 'when to do it'. You never write timing loops again. You're welcome."
+                        description="The Heartbeat guarantees your code runs at exact intervals. No more 'jitter' or missed sensor readings. Predictable is professional."
                     />
                 </div>
             </div>
 
-            {/* The Sandwich */}
+            {/* Watchdog Pattern */}
             <div className="space-y-4">
-                <h2 className="text-2xl font-semibold text-white">The Architecture Sandwich</h2>
+                <h2 className="text-2xl font-semibold text-white">The Watchdog Pattern</h2>
                 <p className="text-neutral-400 leading-relaxed">
-                    Kenate is a three-layer system. Yes, we call it a sandwich. No, we will not apologize.
+                    For production-grade autonomy, Euretix Labs recommends the <span className="text-yellow-400">Watchdog</span> pattern.
                 </p>
-
-                <div className="space-y-2 mt-4">
-                    <div className="rounded-lg border border-white/10 bg-[#0A0A0A] p-4">
-                        <div className="flex items-center gap-3">
-                            <span className="text-emerald-400 font-mono text-sm w-24">Layer 3</span>
-                            <span className="text-white font-medium">Your Python States</span>
-                            <span className="text-neutral-500 text-sm ml-auto">You work here</span>
-                        </div>
-                    </div>
-                    <div className="rounded-lg border border-white/10 bg-[#0A0A0A] p-4">
-                        <div className="flex items-center gap-3">
-                            <span className="text-blue-400 font-mono text-sm w-24">Layer 2</span>
-                            <span className="text-white font-medium">Pybind11 Bridge</span>
-                            <span className="text-neutral-500 text-sm ml-auto">Translates Python to C++</span>
-                        </div>
-                    </div>
-                    <div className="rounded-lg border border-white/10 bg-[#0A0A0A] p-4">
-                        <div className="flex items-center gap-3">
-                            <span className="text-yellow-400 font-mono text-sm w-24">Layer 1</span>
-                            <span className="text-white font-medium">C++ Engine</span>
-                            <span className="text-neutral-500 text-sm ml-auto">The 1000Hz brain</span>
-                        </div>
-                    </div>
+                <div className="rounded-lg border border-white/10 bg-[#0A0A0A] p-4">
+                    <pre className="font-mono text-sm text-neutral-300">
+                        {`# The Watchdog constantly monitors system health
+class ThermalWatchdog(kenate.ThresholdState):
+    def on_update(self):
+        if self.get_system_temperature() > 85.0:
+            # Overrides ANY active mission state
+            self.engine.set_state("Safety")`}
+                    </pre>
                 </div>
+                <p className="text-neutral-500 text-sm italic">
+                    Always include a background state that monitors system vitals (heat, battery, signal).
+                </p>
             </div>
 
             {/* Navigation */}
@@ -122,7 +93,7 @@ export default function PhilosophyPage() {
                     <Link href="/documentation/reactive" className="group flex flex-col items-end gap-2 text-right">
                         <span className="text-neutral-500 text-xs font-mono">Next</span>
                         <div className="flex items-center gap-2 text-emerald-400 font-medium group-hover:text-emerald-300 transition-colors">
-                            The Engine
+                            The Heartbeat
                             <ArrowRight size={18} />
                         </div>
                     </Link>

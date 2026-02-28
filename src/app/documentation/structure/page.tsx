@@ -7,12 +7,12 @@ export default function StructurePage() {
         <div className="space-y-10 pb-20">
             {/* Header */}
             <div>
-                <p className="text-emerald-500 font-mono text-xs mb-4">Getting Started</p>
+                <p className="text-emerald-500 font-mono text-xs mb-4">Organization</p>
                 <h1 className="text-4xl md:text-5xl font-bold tracking-tight text-white mb-6">
                     Project Structure
                 </h1>
                 <p className="text-lg text-neutral-400 leading-relaxed max-w-2xl">
-                    A Kenate project is organized to separate your behaviors from your configuration. Clean code, happy life.
+                    Kenate projects are organized to separate mission logic from hardware configuration. This ensures consistency across all robotic platforms.
                 </p>
             </div>
 
@@ -20,106 +20,48 @@ export default function StructurePage() {
             <div className="space-y-4">
                 <h2 className="text-2xl font-semibold text-white">Standard Layout</h2>
                 <p className="text-neutral-400">
-                    When you run <code className="text-emerald-400 bg-emerald-500/10 px-1 py-0.5 rounded">kenate init my_robot</code>, this is what you get:
+                    When you run <code className="text-emerald-400 bg-emerald-500/10 px-1 py-0.5 rounded">kenate init</code>, the system scaffolds this structure:
                 </p>
 
                 <div className="rounded-xl border border-white/10 bg-[#0A0A0A] p-6 font-mono text-sm">
                     <div className="space-y-1">
                         <TreeItem name="my_robot/" isFolder />
-                        <TreeItem name="hardware.toml" indent={1} desc="Hardware configuration" />
-                        <TreeItem name="main.py" indent={1} desc="Entry point" isCode />
-                        <TreeItem name="states/" indent={1} isFolder />
-                        <TreeItem name="__init__.py" indent={2} />
-                        <TreeItem name="patrol.py" indent={2} desc="Your state files" isCode />
-                        <TreeItem name="alert.py" indent={2} isCode />
-                        <TreeItem name="idle.py" indent={2} isCode />
-                        <TreeItem name="tests/" indent={1} isFolder />
-                        <TreeItem name="test_patrol.py" indent={2} desc="Unit tests" isCode />
-                        <TreeItem name="build/" indent={1} isFolder isDim desc="(Generated) C++ artifacts" />
-                        <TreeItem name=".kenate/" indent={1} isFolder isDim desc="(Hidden) Cache" />
+                        <TreeItem name="configs/" indent={1} isFolder desc="Robot Profiles (.json)" />
+                        <TreeItem name="drone_v1.json" indent={2} />
+                        <TreeItem name="src/" indent={1} isFolder desc="Mission Logic" />
+                        <TreeItem name="patrol.py" indent={2} isCode />
+                        <TreeItem name="main.py" indent={2} desc="Entry point" isCode />
+                        <TreeItem name="examples/" indent={1} isFolder desc="Reference Templates" />
+                        <TreeItem name="python/" indent={1} isFolder desc="Framework Libraries" />
+                        <TreeItem name=".kenate_logs/" indent={1} isFolder isDim desc="Mission Telemetry" />
+                        <TreeItem name="build/" indent={1} isFolder isDim desc="Hardware Bridge Binaries" />
                     </div>
                 </div>
             </div>
 
-            {/* Key Files */}
+            {/* Key Areas */}
             <div className="space-y-6">
-                <h2 className="text-2xl font-semibold text-white">Key Files Explained</h2>
+                <h2 className="text-2xl font-semibold text-white">The src/ Directory</h2>
+                <p className="text-neutral-400">
+                    The <code className="text-emerald-400 bg-emerald-500/10 px-1 rounded">src/</code> folder is where you live. Place all your autonomous state definitions and mission launcher scripts here. Engineers should never write mission logic in the framework folders.
+                </p>
 
-                {/* hardware.toml */}
                 <div className="space-y-3">
                     <h3 className="text-lg font-medium text-white">
-                        <code className="text-blue-400">hardware.toml</code>
+                        <code className="text-blue-400">configs/robot_profile.json</code>
                     </h3>
                     <p className="text-neutral-400">
-                        Defines your hardware configuration. Change this file to switch platforms without touching your Python code. It's like magic, but with TOML.
+                        The "blueprint" of your hardware. By separating the <span className="text-white">Brain Logic</span> from the <span className="text-white">Body Data</span>, you can run the same mission code on different robots just by swapping this file.
                     </p>
-                    <div className="rounded-lg border border-white/10 bg-[#0A0A0A] p-4 overflow-x-auto">
-                        <pre className="font-mono text-sm text-neutral-300">
-                            {`[driver]
-type = "raspberry_pi"  # or "odrive", "serial", "mock"
-
-[motors]
-left_wheel = { pin = 18, type = "pwm" }
-right_wheel = { pin = 19, type = "pwm" }
-
-[sensors]
-front_sonar = { pin = 23, type = "hc-sr04" }`}
-                        </pre>
-                    </div>
                 </div>
 
-                {/* main.py */}
                 <div className="space-y-3">
                     <h3 className="text-lg font-medium text-white">
-                        <code className="text-emerald-400">main.py</code>
+                        <code className="text-yellow-400">.kenate_logs/</code>
                     </h3>
                     <p className="text-neutral-400">
-                        The entry point. You register your states and start the Engine here. Nice and simple.
+                        The high-speed "Black Box." This directory stores high-frequency telemetry data for post-mission analysis. If a robot crashes, you can "rewind" this data to see exactly what happened.
                     </p>
-                    <div className="rounded-lg border border-white/10 bg-[#0A0A0A] p-4 overflow-x-auto">
-                        <pre className="font-mono text-sm text-neutral-300">
-                            {`import kenate
-from states.patrol import PatrolState
-from states.alert import AlertState
-from states.idle import IdleState
-
-engine = kenate.Engine()
-engine.load_config("hardware.toml")
-
-engine.register_state("Idle", IdleState())
-engine.register_state("Patrol", PatrolState())
-engine.register_state("Alert", AlertState())
-
-engine.start("Idle")  # Blocking call`}
-                        </pre>
-                    </div>
-                </div>
-
-                {/* states/ */}
-                <div className="space-y-3">
-                    <h3 className="text-lg font-medium text-white">
-                        <code className="text-yellow-400">states/</code>
-                    </h3>
-                    <p className="text-neutral-400">
-                        Each behavior lives in its own file. One state per file keeps things clean and testable. Your future self will thank you.
-                    </p>
-                    <div className="rounded-lg border border-white/10 bg-[#0A0A0A] p-4 overflow-x-auto">
-                        <pre className="font-mono text-sm text-neutral-300">
-                            {`# states/patrol.py
-import kenate
-
-class PatrolState(kenate.BaseState):
-    def on_enter(self):
-        self.log("Starting patrol...")
-    
-    def on_update(self):
-        self.set_motor_speed(0, 50)  # Left motor
-        self.set_motor_speed(1, 50)  # Right motor
-        
-        if self.get_distance(0) < 30:
-            self.change_state("Alert")`}
-                        </pre>
-                    </div>
                 </div>
             </div>
 

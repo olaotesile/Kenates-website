@@ -1,8 +1,21 @@
 "use client";
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Thermometer, Battery, Signal, Ruler } from "lucide-react";
 
-export default function SensorsPage() {
+function APIMethod({ method, description }: { method: string; description: string }) {
+    return (
+        <div className="p-5 rounded-xl border border-white/5 bg-white/[0.02] space-y-3">
+            <div className="flex items-center justify-between">
+                <code className="text-emerald-400 font-mono text-sm">{method}</code>
+            </div>
+            <p className="text-sm text-neutral-400 leading-relaxed">
+                {description}
+            </p>
+        </div>
+    );
+}
+
+export default function SensorPage() {
     return (
         <div className="space-y-10 pb-20">
             {/* Header */}
@@ -12,129 +25,58 @@ export default function SensorsPage() {
                     Sensor API
                 </h1>
                 <p className="text-lg text-neutral-400 leading-relaxed max-w-2xl">
-                    Read sensor data from your State classes. The Engine handles polling at 1000Hz so you don't have to.
+                    Every State in Kenate has direct access to the robot's perception layer. Data is polled at <span className="text-white font-medium">1000Hz</span> by the C++ Kernel.
                 </p>
             </div>
 
-            {/* Available Methods */}
-            <div className="space-y-4">
-                <h2 className="text-2xl font-semibold text-white">Sensing Methods</h2>
-                <p className="text-neutral-400">
-                    These methods are available on any class that inherits from <code className="text-emerald-400 bg-emerald-500/10 px-1 py-0.5 rounded">kenate.BaseState</code>.
-                </p>
-
-                <div className="rounded-xl border border-white/10 bg-[#0A0A0A] overflow-hidden">
-                    <table className="w-full text-sm">
-                        <thead className="bg-white/5 border-b border-white/10">
-                            <tr>
-                                <th className="text-left px-4 py-3 text-neutral-400 font-medium">Method</th>
-                                <th className="text-left px-4 py-3 text-neutral-400 font-medium">Returns</th>
-                            </tr>
-                        </thead>
-                        <tbody className="divide-y divide-white/5">
-                            <tr>
-                                <td className="px-4 py-3 font-mono text-emerald-400">get_distance(sensor_id)</td>
-                                <td className="px-4 py-3 text-neutral-300">Distance in centimeters (float)</td>
-                            </tr>
-                            <tr>
-                                <td className="px-4 py-3 font-mono text-emerald-400">get_encoder(motor_id)</td>
-                                <td className="px-4 py-3 text-neutral-300">Raw encoder ticks (int)</td>
-                            </tr>
-                            <tr>
-                                <td className="px-4 py-3 font-mono text-emerald-400">get_battery_voltage()</td>
-                                <td className="px-4 py-3 text-neutral-300">System voltage (float)</td>
-                            </tr>
-                            <tr>
-                                <td className="px-4 py-3 font-mono text-emerald-400">get_imu_heading()</td>
-                                <td className="px-4 py-3 text-neutral-300">Compass heading 0-360 (float)</td>
-                            </tr>
-                        </tbody>
-                    </table>
+            {/* Vitals Sensors */}
+            <div className="space-y-6">
+                <h2 className="text-2xl font-semibold text-white">System Vitals</h2>
+                <div className="grid md:grid-cols-3 gap-4">
+                    <div className="p-4 rounded-xl border border-white/5 bg-white/[0.02] space-y-3">
+                        <Battery className="text-yellow-400" size={20} />
+                        <code className="text-xs font-mono text-neutral-400">get_battery_level()</code>
+                        <p className="text-xs text-neutral-500">Returns percentage (0-100).</p>
+                    </div>
+                    <div className="p-4 rounded-xl border border-white/5 bg-white/[0.02] space-y-3">
+                        <Thermometer className="text-red-400" size={20} />
+                        <code className="text-xs font-mono text-neutral-400">get_system_temperature()</code>
+                        <p className="text-xs text-neutral-500">Returns Celsius (float).</p>
+                    </div>
+                    <div className="p-4 rounded-xl border border-white/5 bg-white/[0.02] space-y-3">
+                        <Signal className="text-blue-400" size={20} />
+                        <code className="text-xs font-mono text-neutral-400">get_signal_strength()</code>
+                        <p className="text-xs text-neutral-500">Returns dBm (int).</p>
+                    </div>
                 </div>
             </div>
 
-            {/* get_distance */}
+            {/* Perception Methods */}
+            <div className="space-y-6">
+                <h2 className="text-2xl font-semibold text-white">Environment Perception</h2>
+                <div className="grid gap-4">
+                    <APIMethod
+                        method="get_height_sensor()"
+                        description="Returns distance to the ground. Critical for drones and hexapods."
+                    />
+                    <APIMethod
+                        method="get_distance_sensor(id)"
+                        description="Returns distance to nearest obstacle in meters. ID maps to the Robot Profile."
+                    />
+                </div>
+            </div>
+
+            {/* Example */}
             <div className="space-y-4">
-                <h2 className="text-2xl font-semibold text-white">
-                    <code className="text-emerald-400">get_distance(sensor_id)</code>
-                </h2>
-                <p className="text-neutral-400">
-                    Returns distance from an ultrasonic or IR sensor. Units are centimeters because we're civilized.
-                </p>
-                <div className="rounded-lg border border-white/10 bg-[#0A0A0A] p-4">
+                <h2 className="text-2xl font-semibold text-white">Example Usage</h2>
+                <div className="rounded-lg border border-white/10 bg-[#0A0A0A] p-4 overflow-x-auto">
                     <pre className="font-mono text-sm text-neutral-300">
                         {`def on_update(self):
-    front = self.get_distance(0)  # Front sensor
+    if self.get_distance_sensor("front") < 0.5:
+        self.engine.set_state("AVOID")
     
-    if front < 30:
-        self.change_state("Avoid")
-    else:
-        self.set_motor_speed(0, 50)`}
-                    </pre>
-                </div>
-            </div>
-
-            {/* get_encoder */}
-            <div className="space-y-4">
-                <h2 className="text-2xl font-semibold text-white">
-                    <code className="text-purple-400">get_encoder(motor_id)</code>
-                </h2>
-                <p className="text-neutral-400">
-                    Returns raw encoder ticks. Use for odometry or PID control. The numbers go up when wheels spin.
-                </p>
-                <div className="rounded-lg border border-white/10 bg-[#0A0A0A] p-4">
-                    <pre className="font-mono text-sm text-neutral-300">
-                        {`def on_enter(self):
-    self.start_ticks = self.get_encoder(0)
-
-def on_update(self):
-    # Move forward 1000 ticks
-    current = self.get_encoder(0)
-    if current - self.start_ticks >= 1000:
-        self.change_state("Done")
-    else:
-        self.set_motor_speed(0, 50)`}
-                    </pre>
-                </div>
-            </div>
-
-            {/* get_battery_voltage */}
-            <div className="space-y-4">
-                <h2 className="text-2xl font-semibold text-white">
-                    <code className="text-yellow-400">get_battery_voltage()</code>
-                </h2>
-                <p className="text-neutral-400">
-                    Returns system voltage. Useful for low-battery warnings. Nobody likes a dead robot.
-                </p>
-                <div className="rounded-lg border border-white/10 bg-[#0A0A0A] p-4">
-                    <pre className="font-mono text-sm text-neutral-300">
-                        {`def on_update(self):
-    voltage = self.get_battery_voltage()
-    
-    if voltage < 11.0:
-        self.log("LOW BATTERY!")
-        self.change_state("ReturnToBase")`}
-                    </pre>
-                </div>
-            </div>
-
-            {/* get_imu_heading */}
-            <div className="space-y-4">
-                <h2 className="text-2xl font-semibold text-white">
-                    <code className="text-blue-400">get_imu_heading()</code>
-                </h2>
-                <p className="text-neutral-400">
-                    Returns compass heading from IMU (0-360 degrees). North is 0. East is 90. You get the idea.
-                </p>
-                <div className="rounded-lg border border-white/10 bg-[#0A0A0A] p-4">
-                    <pre className="font-mono text-sm text-neutral-300">
-                        {`def on_update(self):
-    heading = self.get_imu_heading()
-    
-    # Turn to face North (0 degrees)
-    error = heading - 0
-    self.set_motor_speed(0, error * 0.5)
-    self.set_motor_speed(1, -error * 0.5)`}
+    if self.get_system_temperature() > 80.0:
+        self.engine.set_state("THERMAL_SHUTDOWN")`}
                     </pre>
                 </div>
             </div>

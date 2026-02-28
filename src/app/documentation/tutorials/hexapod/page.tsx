@@ -1,225 +1,174 @@
 "use client";
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
-import Image from "next/image";
+import { ArrowRight, Cpu, Zap, Activity, Info } from "lucide-react";
 
-export default function HexapodTutorialPage() {
+export default function HexapodTutorial() {
     return (
-        <div className="space-y-10 pb-20">
+        <div className="space-y-12 pb-20">
             {/* Header */}
-            <div>
-                <p className="text-emerald-500 font-mono text-xs mb-4">Tutorial</p>
-                <h1 className="text-4xl md:text-5xl font-bold tracking-tight text-white mb-6">
-                    Build a Hexapod
+            <div className="space-y-4">
+                <p className="text-emerald-500 font-mono text-xs mb-4 uppercase tracking-widest">Masterclass V1.0.6</p>
+                <h1 className="text-4xl md:text-6xl font-bold tracking-tight text-white">
+                    Hexapod Walking Gait
                 </h1>
-                <p className="text-lg text-neutral-400 leading-relaxed max-w-2xl">
-                    A six-legged walking robot is the ultimate test of state management. Let's build one with Kenate.
-                </p>
-            </div>
-
-            {/* Image */}
-            <div className="rounded-xl overflow-hidden border border-white/10">
-                <img
-                    src="https://blog.arduino.cc/wp-content/uploads/2023/04/Hexapod1.jpg"
-                    alt="Hexapod robot"
-                    className="w-full h-64 object-cover"
-                />
-            </div>
-
-            {/* Overview */}
-            <div className="space-y-4">
-                <h2 className="text-2xl font-semibold text-white">What We're Building</h2>
-                <p className="text-neutral-400">
-                    A hexapod that can:
-                </p>
-                <ul className="list-disc list-inside text-neutral-400 space-y-2 ml-4 marker:text-emerald-500">
-                    <li><strong className="text-white">Idle</strong> - Stand still and wait</li>
-                    <li><strong className="text-white">Walk</strong> - Move forward using a tripod gait</li>
-                    <li><strong className="text-white">Turn</strong> - Rotate in place</li>
-                    <li><strong className="text-white">Stop</strong> - Emergency halt (for when things get spicy)</li>
-                </ul>
-            </div>
-
-            {/* Step 1: Project Setup */}
-            <div className="space-y-4">
-                <h2 className="text-2xl font-semibold text-white">Step 1: Create the Project</h2>
-                <div className="rounded-lg border border-white/10 bg-[#0A0A0A] p-4">
-                    <pre className="font-mono text-sm text-neutral-300">
-                        {`$ kenate init hexapod
-$ cd hexapod`}
-                    </pre>
+                <div className="flex items-center gap-4 text-neutral-400 text-sm">
+                    <span className="flex items-center gap-1"><Cpu size={14} /> Tripod Pattern</span>
+                    <span className="flex items-center gap-1"><Zap size={14} /> Biomimetic Logic</span>
                 </div>
             </div>
 
-            {/* Step 2: Hardware Config */}
-            <div className="space-y-4">
-                <h2 className="text-2xl font-semibold text-white">Step 2: Configure Hardware</h2>
-                <p className="text-neutral-400">
-                    Edit <code className="text-blue-400 bg-blue-500/10 px-1 py-0.5 rounded">hardware.toml</code> for 18 servos (3 per leg x 6 legs). Yeah, that's a lot of legs.
+            {/* Preface */}
+            <div className="bg-neutral-900/50 border border-neutral-800 rounded-2xl p-8 space-y-4">
+                <h2 className="text-xl font-semibold text-white">The Challenge</h2>
+                <p className="text-neutral-400 leading-relaxed italic">
+                    "Welcome to the big leagues! Coordinating 6 legs at once is one of the hardest things in robotics. But don't worry, we're going to do it 'to the bone.'"
                 </p>
-                <div className="rounded-lg border border-white/10 bg-[#0A0A0A] p-4 overflow-x-auto">
-                    <pre className="font-mono text-sm text-neutral-300">
-                        {`[driver]
-type = "raspberry_pi"
+            </div>
 
-[motors]
-# Leg 1 (Front Left)
-leg1_coxa = { pin = 0, type = "servo" }
-leg1_femur = { pin = 1, type = "servo" }
-leg1_tibia = { pin = 2, type = "servo" }
-
-# Leg 2 (Front Right)
-leg2_coxa = { pin = 3, type = "servo" }
-leg2_femur = { pin = 4, type = "servo" }
-leg2_tibia = { pin = 5, type = "servo" }
-
-# ... continue for legs 3-6`}
-                    </pre>
+            {/* Installation */}
+            <div className="space-y-4">
+                <h3 className="text-2xl font-bold text-white flex items-center gap-3">
+                    <span className="text-emerald-500">01.</span> Installation
+                </h3>
+                <p className="text-neutral-400">Before we do anything, let's get the engine installed on your machine. This gives us the high-speed "Heartbeat" we need for smooth walking.</p>
+                <div className="bg-[#0A0A0A] border border-white/10 rounded-xl p-4 font-mono text-sm text-emerald-400">
+                    $ pip install kenate --no-cache-dir
                 </div>
             </div>
 
-            {/* Step 3: Idle State */}
-            <div className="space-y-4">
-                <h2 className="text-2xl font-semibold text-white">Step 3: Create IdleState</h2>
-                <p className="text-neutral-400">
-                    Create <code className="text-emerald-400 bg-emerald-500/10 px-1 py-0.5 rounded">states/idle.py</code>:
-                </p>
-                <div className="rounded-lg border border-white/10 bg-[#0A0A0A] p-4 overflow-x-auto">
-                    <pre className="font-mono text-sm text-neutral-300">
-                        {`import kenate
-
-class IdleState(kenate.BaseState):
-    def on_enter(self):
-        self.log("Hexapod idle. Waiting for command...")
-        # Set all legs to neutral position
-        for i in range(18):
-            self.set_servo_angle(i, 90)`}
-                    </pre>
+            {/* The Walking Plan */}
+            <div className="space-y-6">
+                <h3 className="text-2xl font-bold text-white flex items-center gap-3">
+                    <span className="text-emerald-500">02.</span> The Walking Plan (Pseudo-Code)
+                </h3>
+                <div className="grid gap-4">
+                    {[
+                        "START: Center all 6 legs so the robot is standing tall.",
+                        "TRIPOD A: Lift legs 1, 3, and 5 together.",
+                        "TRIPOD B: While Group A is lifting, legs 2, 4, and 6 push the ground.",
+                        "COORDINATION: Use a Sine wave to make the transition smooth instead of bouncy.",
+                        "SYSTEM CHECK: Constantly check the height sensor. If the robot 'sags', adjust power.",
+                        "DATA: Save every single leg position to the Black Box for later."
+                    ].map((step, i) => (
+                        <div key={i} className="flex items-start gap-4 p-4 rounded-xl border border-white/5 bg-white/[0.02]">
+                            <span className="text-emerald-500 font-mono text-xs mt-1">{i + 1}</span>
+                            <p className="text-sm text-neutral-300">{step}</p>
+                        </div>
+                    ))}
                 </div>
             </div>
 
-            {/* Step 4: Walk State */}
-            <div className="space-y-4">
-                <h2 className="text-2xl font-semibold text-white">Step 4: Create WalkState</h2>
-                <p className="text-neutral-400">
-                    The tripod gait alternates two sets of 3 legs. It looks cooler than it sounds. Create <code className="text-emerald-400 bg-emerald-500/10 px-1 py-0.5 rounded">states/walk.py</code>:
-                </p>
-                <div className="rounded-lg border border-white/10 bg-[#0A0A0A] p-4 overflow-x-auto">
-                    <pre className="font-mono text-sm text-neutral-300">
-                        {`import kenate
+            {/* The Code */}
+            <div className="space-y-6">
+                <h3 className="text-2xl font-bold text-white flex items-center gap-3">
+                    <span className="text-emerald-500">03.</span> The Implementation
+                </h3>
+                <div className="relative group">
+                    <div className="absolute -inset-1 bg-gradient-to-r from-emerald-500/20 to-blue-500/20 rounded-2xl blur opacity-25 group-hover:opacity-50 transition duration-1000"></div>
+                    <div className="relative bg-[#0A0A0A] border border-white/10 rounded-2xl p-6 overflow-x-auto shadow-2xl">
+                        <pre className="font-mono text-sm leading-relaxed text-neutral-300">
+                            {`from kenate import Robot, BaseState
+from kenate.stdlib import WaitState, BlackBoxLogger
+from kenate.diag import TerminalVisualizer
 import math
+import time
 
-class WalkState(kenate.BaseState):
+class HexapodWalking(BaseState):
+    """
+    RATIONALE: We don't use 'if' statements to walk. We use Sine waves. 
+    It makes the robot move like a living creature instead of a stuttering toy.
+    """
     def on_enter(self):
-        self.phase = 0
-        self.log("Walking!")
-    
+        print("\\n[GAIT] Initializing Biomimetic Tripod Sequence...")
+        self.logger = BlackBoxLogger()
+        self.viz = TerminalVisualizer(robot_id="HEXA-v1")
+        
+        # Our internal "Clock" for the walking wave
+        self.cycle_time = 0.0 
+        self.step_height = 5.0 
+        self.walking_speed = 2.0 
+
     def on_update(self):
-        # Tripod gait: legs 1,4,5 move, then legs 2,3,6
-        t = self.get_time()
+        # 1. TIME: Constant 1ms heartbeat
+        self.cycle_time += 0.001 
         
-        # Group A: legs 0, 3, 4 (indices for coxa servos)
-        group_a = [0, 9, 12]
-        # Group B: legs 1, 2, 5
-        group_b = [3, 6, 15]
-        
-        # Sine wave for smooth motion
-        wave = math.sin(t * 4) * 30  # ±30 degrees
-        
-        for idx in group_a:
-            self.set_servo_angle(idx, 90 + wave)
-        for idx in group_b:
-            self.set_servo_angle(idx, 90 - wave)
-        
-        # Check for obstacle
-        if self.get_distance(0) < 20:
-            self.change_state("Stop")`}
-                    </pre>
+        # 2. THE WAVE: Tripod pattern (Sine Wave transition)
+        wave_a = math.sin(self.cycle_time * self.walking_speed * 2 * math.pi)
+
+        # 3. LEG LIFT: Calculate lift heights
+        leg_group_a_height = max(0, wave_a * self.step_height)
+        leg_group_b_height = max(0, -wave_a * self.step_height)
+
+        # 4. SENSORS: Monitor ground and thermals
+        ground_distance = self.get_height_sensor()
+        temp = self.get_system_temperature()
+
+        # 5. DASHBOARD: Live Telemetry
+        self.viz.render(self.name, {
+            'height': ground_distance,
+            'distance': leg_group_a_height,
+            'battery': 95,
+            'temp': temp,
+            'signal': 100
+        })
+
+        # 6. BLACK BOX: High-frequency recording
+        self.logger.log(self.name, {
+            'height': ground_distance, 
+            'distance': leg_group_a_height, 
+            'temp': temp
+        })
+
+def main():
+    robot = Robot(port="SIMULATION")
+    robot.create_state("TripodGait", HexapodWalking)
+    
+    try:
+        robot.start()
+        for _ in range(100):
+            time.sleep(0.1)
+    finally:
+        robot.stop()`}
+                        </pre>
+                    </div>
                 </div>
             </div>
 
-            {/* Step 5: Stop State */}
-            <div className="space-y-4">
-                <h2 className="text-2xl font-semibold text-white">Step 5: Create StopState</h2>
-                <p className="text-neutral-400">
-                    Emergency stop. For when things don't go according to plan. Create <code className="text-emerald-400 bg-emerald-500/10 px-1 py-0.5 rounded">states/stop.py</code>:
-                </p>
-                <div className="rounded-lg border border-white/10 bg-[#0A0A0A] p-4 overflow-x-auto">
-                    <pre className="font-mono text-sm text-neutral-300">
-                        {`import kenate
+            {/* To the Bone Breakdown */}
+            <div className="space-y-8">
+                <h3 className="text-2xl font-bold text-white flex items-center gap-3">
+                    <span className="text-emerald-500"><Info size={24} /></span> Breakdown: To The Bone
+                </h3>
 
-class StopState(kenate.BaseState):
-    def on_enter(self):
-        self.log("EMERGENCY STOP!")
-        # Return all servos to neutral
-        for i in range(18):
-            self.set_servo_angle(i, 90)`}
-                    </pre>
+                <div className="space-y-6">
+                    <div className="space-y-3">
+                        <h4 className="text-lg font-semibold text-emerald-400 font-mono underline decoration-emerald-500/30 underline-offset-4">Sine Wave Rationale</h4>
+                        <p className="text-neutral-400 leading-relaxed text-sm">
+                            We don't use boolean gates for motion. Using <code className="text-white font-mono">math.sin()</code> ensures that velocity ramps up and down naturally at the peak and trough of every step. This prevents mechanical stress on the plastic servo gears and eliminates "shaking."
+                        </p>
+                    </div>
+
+                    <div className="space-y-3">
+                        <h4 className="text-lg font-semibold text-blue-400 font-mono underline decoration-blue-500/30 underline-offset-4">The Cycle Clock</h4>
+                        <p className="text-neutral-400 leading-relaxed text-sm">
+                            Because <code className="text-white font-mono">on_update()</code> is called every 1ms by the C++ Kernel, adding <span className="text-white">0.001</span> to our clock isn't just a guess—it is exactly one millisecond of real-world time.
+                        </p>
+                    </div>
                 </div>
             </div>
 
-            {/* Step 6: Main */}
-            <div className="space-y-4">
-                <h2 className="text-2xl font-semibold text-white">Step 6: Wire It Up</h2>
-                <p className="text-neutral-400">
-                    Create <code className="text-emerald-400 bg-emerald-500/10 px-1 py-0.5 rounded">main.py</code>:
+            {/* Deployment */}
+            <div className="bg-emerald-500/5 border border-emerald-500/20 rounded-2xl p-8 space-y-6">
+                <h3 className="text-2xl font-bold text-white">04. Moving to the Real Robot</h3>
+                <p className="text-neutral-400 leading-relaxed text-sm">
+                    When you're ready to see the legs move for real, copy this file onto your robot (SSH/Git). Change the <code className="text-white">port</code> from <span className="text-emerald-400">"SIMULATION"</span> to <span className="text-blue-400">"GPIO"</span> or <span className="text-blue-400">"/dev/ttyUSB0"</span>.
                 </p>
-                <div className="rounded-lg border border-white/10 bg-[#0A0A0A] p-4 overflow-x-auto">
-                    <pre className="font-mono text-sm text-neutral-300">
-                        {`import kenate
-from states.idle import IdleState
-from states.walk import WalkState
-from states.stop import StopState
-
-engine = kenate.Engine()
-engine.load_config("hardware.toml")
-
-engine.register_state("Idle", IdleState())
-engine.register_state("Walk", WalkState())
-engine.register_state("Stop", StopState())
-
-engine.start("Idle")`}
-                    </pre>
+                <div className="flex items-center gap-4 p-4 bg-black/40 rounded-xl border border-white/5 font-mono text-xs text-neutral-500">
+                    <Activity size={16} className="text-emerald-500" /> Once you run the script, the C++ Heartbeat takes over and the hexapod stands up!
                 </div>
             </div>
 
-            {/* Step 7: Run */}
-            <div className="space-y-4">
-                <h2 className="text-2xl font-semibold text-white">Step 7: Run It!</h2>
-                <div className="rounded-lg border border-white/10 bg-[#0A0A0A] p-4">
-                    <pre className="font-mono text-sm text-neutral-300">
-                        {`$ kenate run
-
-✓ Build up-to-date
-Starting Engine...
-[INFO] Hexapod idle. Waiting for command...`}
-                    </pre>
-                </div>
-                <p className="text-neutral-400 mt-4">
-                    To switch to walking, you'd trigger <code className="text-emerald-400 bg-emerald-500/10 px-1 rounded">self.change_state("Walk")</code>
-                    from IdleState. Maybe when a button is pressed or a command is received.
-                </p>
-            </div>
-
-            {/* Next Steps */}
-            <div className="space-y-4">
-                <h2 className="text-2xl font-semibold text-white">Next Steps</h2>
-                <ul className="list-disc list-inside text-neutral-400 space-y-2 ml-4 marker:text-emerald-500">
-                    <li>Add a <strong className="text-white">TurnState</strong> for rotation</li>
-                    <li>Use <strong className="text-white">SequenceState</strong> to chain movements</li>
-                    <li>Launch the <strong className="text-white">Visualizer</strong> to debug leg movements</li>
-                    <li>Add IMU input for balance correction</li>
-                </ul>
-            </div>
-
-            {/* Closing */}
-            <div className="bg-neutral-950 border border-neutral-800 rounded-lg p-6 mt-8">
-                <p className="text-neutral-400 italic">
-                    "If it walks like a bug, it's probably your hexapod running Kenate. Ship it."
-                </p>
-            </div>
-
-            {/* Navigation */}
+            {/* Navigation links */}
             <div className="pt-10 border-t border-white/5">
                 <div className="flex items-center justify-between">
                     <Link href="/documentation/visualizer" className="group flex flex-col items-start gap-2 text-left">
@@ -229,10 +178,10 @@ Starting Engine...
                             Visualizer
                         </div>
                     </Link>
-                    <Link href="/documentation" className="group flex flex-col items-end gap-2 text-right">
-                        <span className="text-neutral-500 text-xs font-mono">Back to</span>
+                    <Link href="/documentation/tutorials/delivery" className="group flex flex-col items-end gap-2 text-right">
+                        <span className="text-neutral-500 text-xs font-mono">Next</span>
                         <div className="flex items-center gap-2 text-emerald-400 font-medium group-hover:text-emerald-300 transition-colors">
-                            Introduction
+                            Delivery Robot
                             <ArrowRight size={18} />
                         </div>
                     </Link>

@@ -1,118 +1,131 @@
 "use client";
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Zap } from "lucide-react";
 
-export default function ReactivePage() {
+function APIMethod({ method, description }: { method: string; description: string }) {
+    return (
+        <div className="p-5 rounded-xl border border-white/5 bg-white/[0.02] space-y-3">
+            <div className="flex items-center justify-between">
+                <code className="text-emerald-400 font-mono text-sm">{method}</code>
+            </div>
+            <p className="text-sm text-neutral-400 leading-relaxed">
+                {description}
+            </p>
+        </div>
+    );
+}
+
+export default function HeartbeatPage() {
     return (
         <div className="space-y-10 pb-20">
             {/* Header */}
             <div>
-                <p className="text-emerald-500 font-mono text-xs mb-4">Core Concepts</p>
+                <p className="text-emerald-500 font-mono text-xs mb-4">The Kernel</p>
                 <h1 className="text-4xl md:text-5xl font-bold tracking-tight text-white mb-6">
-                    The Engine
+                    The Heartbeat
                 </h1>
                 <p className="text-lg text-neutral-400 leading-relaxed max-w-2xl">
-                    The C++ Engine is Kenate's secret weapon. It runs 1000 times per second, calling your Python code with precision timing. Fast? Understatement.
+                    At the core of every Kenate robot is a deterministic <span className="text-white font-medium">C++ Kernel</span> that pulses exactly 1000 times per second.
                 </p>
             </div>
 
-            {/* How It Works */}
-            <div className="space-y-4">
-                <h2 className="text-2xl font-semibold text-white">How It Works</h2>
-                <p className="text-neutral-400 leading-relaxed">
-                    When you call <code className="text-emerald-400 bg-emerald-500/10 px-1 py-0.5 rounded">engine.start()</code>,
-                    the C++ Engine takes over. It runs an infinite loop at exactly 1000Hz (once per millisecond).
+            {/* Value Prop */}
+            <div className="bg-emerald-500/10 border border-emerald-500/20 rounded-xl p-6">
+                <h4 className="text-emerald-400 font-medium mb-2 flex items-center gap-2">
+                    <Zap size={18} />
+                    Millisecond Precision
+                </h4>
+                <p className="text-sm text-neutral-300 leading-relaxed text-emerald-200/70">
+                    Most programming languages suffer from "jitter"—unpredictable timing delays. For a robot moving at speed, a 50ms delay can be fatal. Kenate eliminates this by ensuring every <code className="bg-emerald-500/20 px-1 rounded text-emerald-300">on_update()</code> hit happens exactly 1ms after the last.
                 </p>
-                <p className="text-neutral-400 leading-relaxed">
-                    On every tick, it:
-                </p>
-                <ol className="list-decimal list-inside text-neutral-400 space-y-2 ml-4">
-                    <li>Reads all sensor values from hardware</li>
-                    <li>Calls your active State's <code className="text-emerald-400 bg-emerald-500/10 px-1 rounded">on_update()</code> method</li>
-                    <li>Writes motor commands to hardware</li>
-                    <li>Handles any state transitions you requested</li>
-                </ol>
             </div>
 
-            {/* Why 1000Hz */}
-            <div className="space-y-4">
-                <h2 className="text-2xl font-semibold text-white">Why 1000Hz?</h2>
+            {/* Engine API */}
+            <div className="space-y-6">
+                <h2 className="text-2xl font-semibold text-white">Engine API Reference</h2>
+                <p className="text-neutral-400">The <code className="text-blue-400 bg-blue-500/10 px-1 rounded">kenate.Engine</code> class is the central manager of the robot brain.</p>
+
+                <div className="grid gap-4">
+                    <APIMethod
+                        method="add_state(state)"
+                        description="Registers a state object with the engine. The state becomes available for transitions."
+                    />
+                    <APIMethod
+                        method="set_state(name)"
+                        description="Forces the robot to switch to the named state immediately. Triggers on_exit() of current and on_enter() of new."
+                    />
+                    <APIMethod
+                        method="start(initial_state)"
+                        description="Commences the 1000Hz control loop thread. This call blocks the main thread."
+                    />
+                    <APIMethod
+                        method="stop()"
+                        description="Terminates the control loop safely, stopping all motors."
+                    />
+                    <APIMethod
+                        method="set_frequency(hz)"
+                        description="Adjusts the heartbeat speed (default 1000Hz). Advanced use only."
+                    />
+                </div>
+            </div>
+
+            {/* The Heartbeat */}
+            <div className="space-y-6">
+                <h2 className="text-2xl font-semibold text-white">The 1ms Heartbeat</h2>
                 <p className="text-neutral-400 leading-relaxed">
-                    Smooth robot motion requires fast, consistent updates. If your loop runs at inconsistent speeds
-                    (50ms one tick, 200ms the next), your robot's movements will be jerky and unpredictable.
+                    Most programming languages suffer from <span className="text-red-400">"jitter"</span>—unpredictable delays in code execution. For a robot moving at high speeds, a 50ms delay can be catastrophic. Kenate's dedicated C++ Kernel pulses exactly 1000 times per second to eliminate this.
                 </p>
+
+                <div className="grid md:grid-cols-2 gap-6 pt-4">
+                    <div className="p-4 rounded-xl border border-white/5 bg-white/[0.02]">
+                        <h4 className="text-white font-medium text-sm mb-1">The Heartbeat</h4>
+                        <p className="text-xs text-neutral-500">The 1000Hz internal clock that drives the engine.</p>
+                    </div>
+                    <div className="p-4 rounded-xl border border-white/5 bg-white/[0.02]">
+                        <h4 className="text-white font-medium text-sm mb-1">The Bridge</h4>
+                        <p className="text-xs text-neutral-500">The high-speed connection between Python logic and C++ hardware.</p>
+                    </div>
+                </div>
+            </div>
+
+            {/* Catch-Up Protocol */}
+            <div className="space-y-6 pt-6 border-t border-white/5">
+                <h2 className="text-2xl font-semibold text-white">Tick Overruns & The Catch-Up Protocol</h2>
                 <p className="text-neutral-400 leading-relaxed">
-                    The C++ Engine guarantees each tick is exactly 1ms. This is critical for:
+                    If your Python <code className="font-mono text-emerald-400">on_update()</code> logic takes longer than 1ms, the engine detects that the next wake time has already passed. The C++ Kernel then follows the <span className="text-white font-medium">Catch-Up Protocol:</span>
                 </p>
                 <ul className="list-disc list-inside text-neutral-400 space-y-2 ml-4 marker:text-emerald-500">
-                    <li>PID controllers (smooth motor ramping)</li>
-                    <li>Sensor fusion (combining gyro + accelerometer data)</li>
-                    <li>Precise timing for servos and stepper motors</li>
+                    <li>The engine skips the <code className="font-mono">sleep</code> command entirely.</li>
+                    <li>It executes the next tick <span className="text-white underline">immediately</span>.</li>
+                    <li>The system runs at maximum CPU speed until it regains its 1ms schedule.</li>
                 </ul>
-            </div>
-
-            {/* The Engine API */}
-            <div className="space-y-4">
-                <h2 className="text-2xl font-semibold text-white">Engine API</h2>
-
-                <div className="rounded-xl border border-white/10 bg-[#0A0A0A] overflow-hidden">
-                    <table className="w-full text-sm">
-                        <thead className="bg-white/5 border-b border-white/10">
-                            <tr>
-                                <th className="text-left px-4 py-3 text-neutral-400 font-medium">Method</th>
-                                <th className="text-left px-4 py-3 text-neutral-400 font-medium">Description</th>
-                            </tr>
-                        </thead>
-                        <tbody className="divide-y divide-white/5">
-                            <tr>
-                                <td className="px-4 py-3 font-mono text-emerald-400">register_state(name, state)</td>
-                                <td className="px-4 py-3 text-neutral-300">Add a state to the engine</td>
-                            </tr>
-                            <tr>
-                                <td className="px-4 py-3 font-mono text-emerald-400">start(initial_state)</td>
-                                <td className="px-4 py-3 text-neutral-300">Start the loop (blocking)</td>
-                            </tr>
-                            <tr>
-                                <td className="px-4 py-3 font-mono text-emerald-400">stop()</td>
-                                <td className="px-4 py-3 text-neutral-300">Cleanly terminate the loop</td>
-                            </tr>
-                            <tr>
-                                <td className="px-4 py-3 font-mono text-emerald-400">pause()</td>
-                                <td className="px-4 py-3 text-neutral-300">Freeze (motors hold position)</td>
-                            </tr>
-                            <tr>
-                                <td className="px-4 py-3 font-mono text-emerald-400">resume()</td>
-                                <td className="px-4 py-3 text-neutral-300">Resume from pause</td>
-                            </tr>
-                            <tr>
-                                <td className="px-4 py-3 font-mono text-emerald-400">get_current_state_name()</td>
-                                <td className="px-4 py-3 text-neutral-300">Returns active state name</td>
-                            </tr>
-                            <tr>
-                                <td className="px-4 py-3 font-mono text-emerald-400">load_config(path)</td>
-                                <td className="px-4 py-3 text-neutral-300">Load hardware.toml</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                <div className="bg-red-500/10 border border-red-500/20 rounded-xl p-4">
+                    <p className="text-xs text-red-300">
+                        <span className="font-bold">CRITICAL:</span> Never use <code className="font-mono">time.sleep()</code> or blocking I/O inside <code className="font-mono">on_update()</code>. This forces a permanent Tick Overrun.
+                    </p>
                 </div>
             </div>
-
-            {/* State Transitions */}
+            {/* Custom States */}
             <div className="space-y-4">
-                <h2 className="text-2xl font-semibold text-white">State Transitions</h2>
+                <h2 className="text-2xl font-semibold text-white">The BaseState Lifecycle</h2>
                 <p className="text-neutral-400 leading-relaxed">
-                    To switch states, call <code className="text-emerald-400 bg-emerald-500/10 px-1 py-0.5 rounded">self.change_state("NewState")</code>
-                    from inside your current state. The Engine handles the rest:
+                    All custom behaviors inherit from <code className="text-emerald-400 bg-emerald-500/10 px-1 rounded">kenate.BaseState</code>.
                 </p>
-                <div className="rounded-lg border border-white/10 bg-[#0A0A0A] p-4 overflow-x-auto">
-                    <pre className="font-mono text-sm text-neutral-300">
-                        {`# When you call self.change_state("Alert"):
-# 1. Current state's on_exit() is called
-# 2. New state's on_enter() is called
-# 3. Next tick calls new state's on_update()`}
-                    </pre>
+
+                <div className="grid md:grid-cols-3 gap-4">
+                    <div className="p-4 rounded-lg border border-white/5 bg-white/[0.02] space-y-2">
+                        <code className="text-emerald-400 font-mono text-sm">on_enter()</code>
+                        <p className="text-xs text-neutral-500">Executes once when the state becomes active. Good for setup.</p>
+                    </div>
+                    <div className="p-4 rounded-lg border border-white/5 bg-white/[0.02] space-y-2">
+                        <code className="text-yellow-400 font-mono text-sm">on_update()</code>
+                        <p className="text-xs text-neutral-500">The Heartbeat. Executes every 1ms. Put your control logic here.</p>
+                    </div>
+                    <div className="p-4 rounded-lg border border-white/5 bg-white/[0.02] space-y-2">
+                        <code className="text-red-400 font-mono text-sm">on_exit()</code>
+                        <p className="text-xs text-neutral-500">Executes once when moving to a new state. Clean up here.</p>
+                    </div>
                 </div>
-                <p className="text-neutral-500 text-sm">Clean transitions, every time.</p>
             </div>
 
             {/* Navigation */}
@@ -128,7 +141,7 @@ export default function ReactivePage() {
                     <Link href="/documentation/hardware" className="group flex flex-col items-end gap-2 text-right">
                         <span className="text-neutral-500 text-xs font-mono">Next</span>
                         <div className="flex items-center gap-2 text-emerald-400 font-medium group-hover:text-emerald-300 transition-colors">
-                            Hardware Plugins
+                            Robot Profiles
                             <ArrowRight size={18} />
                         </div>
                     </Link>

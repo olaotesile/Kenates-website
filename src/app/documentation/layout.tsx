@@ -20,8 +20,8 @@ const sidebarItems = [
         title: "Core Concepts",
         items: [
             { title: "Philosophy", href: "/documentation/philosophy" },
-            { title: "The Engine", href: "/documentation/reactive" },
-            { title: "Hardware Plugins", href: "/documentation/hardware" },
+            { title: "The Heartbeat", href: "/documentation/reactive" },
+            { title: "Robot Profiles", href: "/documentation/hardware" },
         ],
     },
     {
@@ -36,13 +36,22 @@ const sidebarItems = [
         title: "Tutorials",
         items: [
             { title: "Build a Hexapod", href: "/documentation/tutorials/hexapod" },
+            { title: "Delivery Robot", href: "/documentation/tutorials/delivery" },
         ],
     },
     {
-        title: "Tools",
+        title: "Systems",
         items: [
-            { title: "CLI Commands", href: "/documentation/cli" },
             { title: "Visualizer", href: "/documentation/visualizer" },
+            { title: "CLI Commands", href: "/documentation/cli" },
+        ],
+    },
+    {
+        title: "Safety & Reliability",
+        items: [
+            { title: "Safety & Thermal", href: "/documentation/safety" },
+            { title: "Recovery Protocols", href: "/documentation/recovery" },
+            { title: "Logging & Black Box", href: "/documentation/logging" },
         ],
     },
 ];

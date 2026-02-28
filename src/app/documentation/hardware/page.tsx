@@ -7,101 +7,98 @@ export default function HardwarePage() {
         <div className="space-y-10 pb-20">
             {/* Header */}
             <div>
-                <p className="text-emerald-500 font-mono text-xs mb-4">API Reference</p>
+                <p className="text-emerald-500 font-mono text-xs mb-4">Body Data</p>
                 <h1 className="text-4xl md:text-5xl font-bold tracking-tight text-white mb-6">
-                    Hardware Plugins
+                    Robot Profiles
                 </h1>
                 <p className="text-lg text-neutral-400 leading-relaxed max-w-2xl">
-                    Switch hardware platforms by changing one line in your config file, not your Python code. That's the dream.
+                    Kenate is a universal framework. To ensure compatibility with any machine, we separate the <span className="text-white font-medium">Brain Logic</span> from the <span className="text-white font-medium">Body Data</span>.
                 </p>
             </div>
 
-            {/* How Plugins Work */}
+            {/* What is a Profile? */}
             <div className="space-y-4">
-                <h2 className="text-2xl font-semibold text-white">How Plugins Work</h2>
+                <h2 className="text-2xl font-semibold text-white">What is a Robot Profile?</h2>
                 <p className="text-neutral-400 leading-relaxed">
-                    Your Python code calls methods like <code className="text-emerald-400 bg-emerald-500/10 px-1 py-0.5 rounded">self.set_motor_speed()</code>.
-                    The plugin translates that into the correct hardware commands for your platform.
+                    A Robot Profile (e.g., <code className="bg-white/5 px-1 rounded text-blue-400">drone_v1.json</code>) is a blueprint of your specific hardware. The Kenate Engine reads this blueprint at startup to understand its physical limits and safety thresholds.
                 </p>
-                <p className="text-neutral-400 leading-relaxed">
-                    To switch from Raspberry Pi to Arduino? Change one line in <code className="text-blue-400 bg-blue-500/10 px-1 py-0.5 rounded">hardware.toml</code>.
-                    Your Python states remain untouched. Magic? Nope, just good design.
-                </p>
+                <div className="grid md:grid-cols-2 gap-4">
+                    <div className="p-4 rounded-xl border border-white/5 bg-white/[0.02] space-y-2">
+                        <h4 className="text-white font-medium text-sm">Portability</h4>
+                        <p className="text-xs text-neutral-500 leading-relaxed">Run the same mission code on multiple robots just by swapping the profile JSON.</p>
+                    </div>
+                    <div className="p-4 rounded-xl border border-white/5 bg-white/[0.02] space-y-2">
+                        <h4 className="text-white font-medium text-sm">Safety</h4>
+                        <p className="text-xs text-neutral-500 leading-relaxed">Protect hardware by defining Thermal and Battery thresholds without hardcoding them.</p>
+                    </div>
+                </div>
             </div>
 
-            {/* Available Plugins */}
+            {/* JSON Schema */}
             <div className="space-y-6">
-                <h2 className="text-2xl font-semibold text-white">Available Plugins</h2>
+                <h2 className="text-2xl font-semibold text-white">Standard Profile Schema</h2>
+                <p className="text-neutral-400 leading-relaxed">
+                    The Robot Profile requires these top-level keys for safe deployment. Missing keys will trigger a <span className="text-red-400 font-mono">Kernel Halt</span> on initialization.
+                </p>
 
-                <div className="grid gap-4">
-                    <PluginCard
-                        name="kenate-raspberry-pi"
-                        type="raspberry_pi"
-                        description="GPIO control for Raspberry Pi. Supports PWM motors, digital sensors, and I2C devices."
-                    />
-                    <PluginCard
-                        name="kenate-serial"
-                        type="serial"
-                        description="For Arduino, Teensy, or any microcontroller connected via USB. Communicates over serial protocol."
-                    />
-                    <PluginCard
-                        name="kenate-odrive"
-                        type="odrive"
-                        description="High-performance brushless motor control. For advanced robotics requiring precise torque control."
-                    />
-                    <PluginCard
-                        name="kenate-mock"
-                        type="mock"
-                        description="Virtual hardware for testing. Simulates motors and sensors without real hardware. Perfect for unit tests."
-                    />
+                <div className="rounded-xl border border-white/10 bg-[#0A0A0A] p-6 overflow-x-auto">
+                    <pre className="font-mono text-sm text-neutral-300">
+                        {`{
+  "ROBOT_ID": "X-SERIES-001",
+  "SAFETY": {
+    "MAX_TEMP": 85.0,
+    "MIN_BATTERY": 15
+  },
+  "PARAMETERS": {
+    "MAX_WHEEL_SPEED": 1.25,
+    "GAINS_P": 0.5
+  }
+}`}
+                    </pre>
+                </div>
+
+                <div className="grid gap-4 mt-6">
+                    <div className="p-4 rounded-xl border border-white/5 bg-white/[0.02]">
+                        <h4 className="text-white font-medium text-sm mb-1">ROBOT_ID</h4>
+                        <p className="text-xs text-neutral-500">Unique identifier used for network discovery and telemetry tagging.</p>
+                    </div>
+                    <div className="p-4 rounded-xl border border-white/5 bg-white/[0.02]">
+                        <h4 className="text-white font-medium text-sm mb-1">SAFETY</h4>
+                        <p className="text-xs text-neutral-500">Global thresholds for hardware protection (Auto-abort logic).</p>
+                    </div>
                 </div>
             </div>
 
-            {/* Configuration */}
+            {/* Example JSON */}
             <div className="space-y-4">
-                <h2 className="text-2xl font-semibold text-white">Configuration</h2>
-                <p className="text-neutral-400">
-                    Set your driver type in <code className="text-blue-400 bg-blue-500/10 px-1 py-0.5 rounded">hardware.toml</code>:
-                </p>
-
-                <div className="rounded-lg border border-white/10 bg-[#0A0A0A] p-4 overflow-x-auto">
+                <h2 className="text-2xl font-semibold text-white">The Blueprint (JSON)</h2>
+                <p className="text-neutral-400">A typical rover profile looks like this:</p>
+                <div className="rounded-xl border border-white/10 bg-[#0A0A0A] p-6 overflow-x-auto">
                     <pre className="font-mono text-sm text-neutral-300">
-                        {`[driver]
-type = "raspberry_pi"  # Change this line to switch platforms
-
-[motors]
-left_wheel = { pin = 18, type = "pwm" }
-right_wheel = { pin = 19, type = "pwm" }
-arm_servo = { pin = 12, type = "servo" }
-
-[sensors]
-front_sonar = { pin = 23, type = "hc-sr04" }
-encoder_left = { pin = 5, type = "encoder" }
-imu = { address = 0x68, type = "mpu6050" }`}
+                        {`{
+    "ROBOT_ID": "ROVER-01",
+    "MAX_WHEEL_SPEED": 2.0,
+    "SAFETY": {
+        "MAX_TEMP": 75.0,
+        "SIGNAL_MIN": 20
+    }
+}`}
                     </pre>
                 </div>
             </div>
 
-            {/* Loading Config */}
+            {/* Usage in Code */}
             <div className="space-y-4">
-                <h2 className="text-2xl font-semibold text-white">Loading Configuration</h2>
-                <p className="text-neutral-400">
-                    In your <code className="text-emerald-400 bg-emerald-500/10 px-1 py-0.5 rounded">main.py</code>,
-                    load the config before registering states:
-                </p>
-
+                <h2 className="text-2xl font-semibold text-white">Loading the Profile</h2>
                 <div className="rounded-lg border border-white/10 bg-[#0A0A0A] p-4 overflow-x-auto">
                     <pre className="font-mono text-sm text-neutral-300">
-                        {`import kenate
-
-engine = kenate.Engine()
-engine.load_config("hardware.toml")  # Load hardware mapping
-
-# Now motor IDs in your states map to real pins
-engine.register_state("Idle", IdleState())
-engine.start("Idle")`}
+                        {`config = kenate.ConfigLoader()
+config.load("your_custom_robot.json")`}
                     </pre>
                 </div>
+                <p className="text-sm text-neutral-500">
+                    Users are encouraged to rename, modify, or replace the included templates to match their specific robotic hardware.
+                </p>
             </div>
 
             {/* Navigation */}
@@ -111,7 +108,7 @@ engine.start("Idle")`}
                         <span className="text-neutral-500 text-xs font-mono">Previous</span>
                         <div className="flex items-center gap-2 text-neutral-300 font-medium group-hover:text-white transition-colors">
                             <ArrowRight size={18} className="rotate-180" />
-                            The Engine
+                            The Heartbeat
                         </div>
                     </Link>
                     <Link href="/documentation/motors" className="group flex flex-col items-end gap-2 text-right">
