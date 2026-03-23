@@ -12,7 +12,7 @@ export default function StructurePage() {
                     Project Structure
                 </h1>
                 <p className="text-lg text-neutral-400 leading-relaxed max-w-2xl">
-                    Kenate projects are organized to separate mission logic from hardware configuration. This ensures consistency across all robotic platforms.
+                    Kenate projects are organized strictly. If you put your mission logic in the same file as your hardware pin configuration, you're doing it wrong. I enforce a structure that actually scales.
                 </p>
             </div>
 
@@ -20,7 +20,7 @@ export default function StructurePage() {
             <div className="space-y-4">
                 <h2 className="text-2xl font-semibold text-white">Standard Layout</h2>
                 <p className="text-neutral-400">
-                    When you run <code className="text-emerald-400 bg-emerald-500/10 px-1 py-0.5 rounded">kenate init</code>, the system scaffolds this structure:
+                    Run <code className="text-emerald-400 bg-emerald-500/10 px-1 py-0.5 rounded">kenate init</code> and I build this for you, so you don't spend three hours arguing over where to put your config files:
                 </p>
 
                 <div className="rounded-xl border border-white/10 bg-[#0A0A0A] p-6 font-mono text-sm">
@@ -43,7 +43,7 @@ export default function StructurePage() {
             <div className="space-y-6">
                 <h2 className="text-2xl font-semibold text-white">The src/ Directory</h2>
                 <p className="text-neutral-400">
-                    The <code className="text-emerald-400 bg-emerald-500/10 px-1 rounded">src/</code> folder is where you live. Place all your autonomous state definitions and mission launcher scripts here. Engineers should never write mission logic in the framework folders.
+                    The <code className="text-emerald-400 bg-emerald-500/10 px-1 rounded">src/</code> folder is your home. Put your autonomous state definitions and mission scripts here. Do not touch the framework folders unless you actively want to break things.
                 </p>
 
                 <div className="space-y-3">
@@ -51,7 +51,7 @@ export default function StructurePage() {
                         <code className="text-blue-400">configs/robot_profile.json</code>
                     </h3>
                     <p className="text-neutral-400">
-                        The "blueprint" of your hardware. By separating the <span className="text-white">Brain Logic</span> from the <span className="text-white">Body Data</span>, you can run the same mission code on different robots just by swapping this file.
+                        The "blueprint" of your hardware. By separating the <span className="text-white">Brain Logic</span> from the <span className="text-white">Body Data</span>, you can run the exact same mission code on completely different robots just by swapping this file. It's almost too easy.
                     </p>
                 </div>
 
@@ -60,7 +60,7 @@ export default function StructurePage() {
                         <code className="text-yellow-400">.kenate_logs/</code>
                     </h3>
                     <p className="text-neutral-400">
-                        The high-speed "Black Box." This directory stores high-frequency telemetry data for post-mission analysis. If a robot crashes, you can "rewind" this data to see exactly what happened.
+                        The high-speed Black Box. If your robot crashes (and it will), you check this folder to see the high-frequency telemetry data. It's how you figure out what went wrong instead of guessing.
                     </p>
                 </div>
             </div>

@@ -12,7 +12,7 @@ export default function CLIPage() {
                     CLI Commands
                 </h1>
                 <p className="text-lg text-neutral-400 leading-relaxed max-w-2xl">
-                    The <code className="text-emerald-400 bg-emerald-500/10 px-1 py-0.5 rounded">kenate</code> command-line tool is your developer multitool. Learn it, love it.
+                    The <code className="text-emerald-400 bg-emerald-500/10 px-1 py-0.5 rounded">kenate</code> CLI is your developer multitool. It does everything. Learn it, use it, and stop writing your own bash scripts.
                 </p>
             </div>
 
@@ -125,7 +125,7 @@ Starting Engine...
                     <code className="text-purple-400">kenate test</code>
                 </h2>
                 <p className="text-neutral-400">
-                    Runs your unit tests using a mock engine (no real hardware needed). Test early, test often.
+                    Runs your unit tests against the mock engine. You don't even need the physical robot. Test your code here before you deploy it and break something in the real world.
                 </p>
                 <div className="rounded-lg border border-white/10 bg-[#0A0A0A] p-4">
                     <pre className="font-mono text-sm text-neutral-300">

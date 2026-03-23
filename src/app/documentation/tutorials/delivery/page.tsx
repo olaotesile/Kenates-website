@@ -12,8 +12,8 @@ export default function DeliveryTutorial() {
                     Autonomous Delivery
                 </h1>
                 <div className="flex items-center gap-4 text-neutral-400 text-sm">
-                    <span className="flex items-center gap-1"><Navigation size={14} /> Warehouse Suite</span>
-                    <span className="flex items-center gap-1"><Shield size={14} /> Fail-Safe Architecture</span>
+                    <span className="flex items-center gap-1">Warehouse Suite</span>
+                    <span className="flex items-center gap-1">Fail-Safe Architecture</span>
                 </div>
             </div>
 
@@ -21,7 +21,7 @@ export default function DeliveryTutorial() {
             <div className="bg-neutral-900/50 border border-neutral-800 rounded-2xl p-8 space-y-4">
                 <h2 className="text-xl font-semibold text-white">Introduction</h2>
                 <p className="text-neutral-400 leading-relaxed italic">
-                    "Step-by-step, we're going to build a professional-grade delivery system. Instead of just looking at code, let's walk through how we build this thing from scratch."
+                    "I'm going to build a delivery system that doesn't immediately crash into the nearest wall and explode. Let's actually engineer this properly."
                 </p>
             </div>
 
@@ -31,8 +31,9 @@ export default function DeliveryTutorial() {
                     <h3 className="text-lg font-bold text-white flex items-center gap-2">
                         <span className="text-emerald-500">01.</span> Install Engine
                     </h3>
-                    <div className="bg-black/40 rounded-xl p-3 font-mono text-xs text-emerald-400 border border-white/5">
-                        $ pip install kenate --no-cache-dir
+                    <div className="bg-black/40 rounded-xl p-3 font-mono text-xs text-emerald-400 border border-white/5 disabled select-none">
+                        $ git clone [repo_link_coming_soon]<br />
+                        $ cd kenate
                     </div>
                 </div>
                 <div className="p-6 rounded-2xl border border-white/5 bg-white/[0.02] space-y-4">
@@ -119,25 +120,25 @@ def main():
 
             {/* To the Bone Breakdown */}
             <div className="space-y-8">
-                <h3 className="text-2xl font-bold text-white flex items-center gap-3">
-                    <span className="text-emerald-500"><Info size={24} /></span> Breakdown: To The Bone
+                <h3 className="text-2xl font-bold text-white mb-4">
+                    Breakdown: To The Bone
                 </h3>
 
                 <div className="grid md:grid-cols-2 gap-8">
                     <div className="space-y-4">
                         <div className="flex items-center gap-2 text-blue-400 font-mono text-sm border-b border-blue-500/20 pb-2">
-                            <Shield size={16} /> The Safety Layer
+                            The Safety Layer
                         </div>
                         <p className="text-neutral-400 text-sm leading-relaxed">
-                            In a professional warehouse, we want a <span className="text-white">"Safe Zone"</span> we can jump to if things break. The <code className="text-emerald-400">SafetyLockdown</code> state is isolated, ensuring that even if navigation logic crashes, the actuators are powered down.
+                            I need a <span className="text-white">"Safe Zone"</span> for when things inevitably catch on fire. The <code className="text-emerald-400">SafetyLockdown</code> state is completely isolated. If your navigation logic crashes hard, this state ensures the motors are immediately killed so your robot doesn't autonomously drive itself off a cliff.
                         </p>
                     </div>
                     <div className="space-y-4">
                         <div className="flex items-center gap-2 text-emerald-400 font-mono text-sm border-b border-emerald-500/20 pb-2">
-                            <Battery size={16} /> Pre-Flight Audit
+                            Pre-Flight Audit
                         </div>
                         <p className="text-neutral-400 text-sm leading-relaxed">
-                            We don't want a robot dying in the middle of a hallway. The <code className="text-emerald-400">BatteryCheck</code> phase records every audit in the Black Box Logger before the wheels ever turn—providing an engineering "paper trail."
+                            I don't want a robot dying halfway down a corridor because you forgot to charge it. The <code className="text-emerald-400">BatteryCheck</code> logs its findings to the Black Box so when the inevitable happens, I have the receipts.
                         </p>
                     </div>
                 </div>
@@ -153,7 +154,7 @@ def main():
                     $ kenate run src/delivery_bot.py
                 </div>
                 <div className="flex items-center gap-4 p-4 bg-black/40 rounded-xl border border-white/5 font-mono text-xs text-neutral-500 italic">
-                    <CheckCircle size={16} className="text-emerald-500" /> The Python script wakes up the C++ engine inside the robot's brain, and the navigation begins!
+                    The Python script wakes up the C++ engine inside the robot's brain, and the navigation begins!
                 </div>
             </div>
 

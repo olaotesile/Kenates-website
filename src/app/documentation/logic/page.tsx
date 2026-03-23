@@ -12,7 +12,7 @@ export default function LogicPage() {
                     Standard Library
                 </h1>
                 <p className="text-lg text-neutral-400 leading-relaxed max-w-2xl">
-                    Pre-built logic modules for the most common robotic behaviors. Import from <code className="text-emerald-400 bg-emerald-500/10 px-1 py-0.5 rounded">kenate.lib</code>.
+                    Pre-built logic modules for the stuff you shouldn't have to write yourself. Import them from <code className="text-emerald-400 bg-emerald-500/10 px-1 py-0.5 rounded">kenate.lib</code> and save yourself a week of debugging.
                 </p>
             </div>
 
@@ -21,7 +21,7 @@ export default function LogicPage() {
                 {/* Motion Lib */}
                 <div className="space-y-4">
                     <h2 className="text-2xl font-semibold text-white">kenate.lib.Motion</h2>
-                    <p className="text-neutral-400">High-level movement commands that handle ramp-up and ramp-down internally.</p>
+                    <p className="text-neutral-400">High-level movement commands that handle ramp-up and ramp-down internally, because physics exists and instant acceleration destroys gearboxes.</p>
                     <div className="grid gap-3">
                         <div className="p-4 rounded-xl border border-white/5 bg-white/[0.02]">
                             <code className="text-emerald-400 font-mono text-sm">move_smooth(distance, speed)</code>
@@ -74,7 +74,7 @@ export default function LogicPage() {
                     <h2 className="text-2xl font-semibold text-white font-mono">Advanced Pattern: Observer Watchdog</h2>
                     <div className="space-y-4 text-neutral-400 leading-relaxed">
                         <p>
-                            Instead of writing safety logic inside every state, instantiate a <code className="text-emerald-400">WatchdogState</code> as an attribute of your primary Task state. This separates the <span className="text-white underline">Mission Goal</span> from the <span className="text-white underline">System Safety</span>.
+                            Don't write safety logic inside every single state; you'll forget one and melt a battery. Instantiate a <code className="text-emerald-400">WatchdogState</code> in the background. It perfectly separates your <span className="text-white underline">Mission Goal</span> from <span className="text-white underline">"Please don't explode."</span>
                         </p>
                     </div>
                 </div>

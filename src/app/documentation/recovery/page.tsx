@@ -12,25 +12,24 @@ export default function RecoveryPage() {
                     Recovery Protocols
                 </h1>
                 <p className="text-lg text-neutral-400 leading-relaxed max-w-2xl">
-                    What happens when things go wrong? Kenate ensures that a software crash doesn't lead to a hardware catastrophe.
+                    What happens when your code inevitably breaks? Kenate ensures your minor software typo doesn't result in a flaming pile of expensive hardware.
                 </p>
             </div>
 
             {/* Automatic Restart */}
             <div className="space-y-6">
                 <div className="flex items-center gap-3">
-                    <RefreshCcw className="text-blue-400" size={24} />
                     <h2 className="text-2xl font-semibold text-white">Kernel Watchdog</h2>
                 </div>
                 <p className="text-neutral-400 leading-relaxed">
-                    If the Python Heartbeat skips 3 consecutive ticks (3ms), the C++ Kernel assumes the logic layer has hung. It will:
+                    If Python skips 3 consecutive ticks (3ms), the C++ Kernel assumes you wrote an infinite loop and your brain has hung. So it takes over:
                 </p>
                 <div className="grid gap-4">
-                    <div className="p-4 rounded-xl border border-white/5 bg-white/[0.02] border-l-2 border-l-blue-500">
+                    <div className="p-4 rounded-xl border border-white/5 bg-white/[0.02]">
                         <h4 className="text-white font-medium text-sm">Step 1: Safe Stop</h4>
                         <p className="text-xs text-neutral-500 mt-1">Kill all PWM signals to the motors immediately.</p>
                     </div>
-                    <div className="p-4 rounded-xl border border-white/5 bg-white/[0.02] border-l-2 border-l-blue-500">
+                    <div className="p-4 rounded-xl border border-white/5 bg-white/[0.02]">
                         <h4 className="text-white font-medium text-sm">Step 2: State Reset</h4>
                         <p className="text-xs text-neutral-500 mt-1">Reload the last known stable state defined in the Robot Profile.</p>
                     </div>
@@ -40,7 +39,6 @@ export default function RecoveryPage() {
             {/* Offline Recovery */}
             <div className="space-y-6">
                 <div className="flex items-center gap-3">
-                    <WifiOff className="text-neutral-500" size={24} />
                     <h2 className="text-2xl font-semibold text-white">Loss of Signal</h2>
                 </div>
                 <p className="text-neutral-400 leading-relaxed">

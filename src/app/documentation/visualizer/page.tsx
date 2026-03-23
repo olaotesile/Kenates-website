@@ -12,14 +12,13 @@ export default function VisualizerPage() {
                     Visualizer & Telemetry
                 </h1>
                 <p className="text-lg text-neutral-400 leading-relaxed max-w-2xl">
-                    High-speed robotics requires high-speed debugging. The Kenate Visualizer streams full telemetry at <span className="text-white font-medium">1000Hz</span> for sub-millisecond inspection.
+                    You can't fix what you can't see. The Kenate Visualizer streams your entire robot's brain at <span className="text-white font-medium">1000Hz</span>. It's like having X-ray vision, but for buggy code.
                 </p>
             </div>
 
             {/* Black Box */}
             <div className="bg-blue-500/10 border border-blue-500/20 rounded-xl p-6">
-                <h4 className="text-blue-400 font-medium mb-2 flex items-center gap-2">
-                    <Activity size={18} />
+                <h4 className="text-blue-400 font-medium mb-2">
                     Black Box Logging
                 </h4>
                 <p className="text-sm text-neutral-300 leading-relaxed">

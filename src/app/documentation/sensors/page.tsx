@@ -25,7 +25,7 @@ export default function SensorPage() {
                     Sensor API
                 </h1>
                 <p className="text-lg text-neutral-400 leading-relaxed max-w-2xl">
-                    Every State in Kenate has direct access to the robot's perception layer. Data is polled at <span className="text-white font-medium">1000Hz</span> by the C++ Kernel.
+                    Every State in Kenate has direct access to the robot's perception layer. Data is polled at <span className="text-white font-medium">1000Hz</span> by the C++ Kernel, because relying on Python for sensor timing is basically asking for a crash.
                 </p>
             </div>
 
@@ -34,17 +34,14 @@ export default function SensorPage() {
                 <h2 className="text-2xl font-semibold text-white">System Vitals</h2>
                 <div className="grid md:grid-cols-3 gap-4">
                     <div className="p-4 rounded-xl border border-white/5 bg-white/[0.02] space-y-3">
-                        <Battery className="text-yellow-400" size={20} />
                         <code className="text-xs font-mono text-neutral-400">get_battery_level()</code>
                         <p className="text-xs text-neutral-500">Returns percentage (0-100).</p>
                     </div>
                     <div className="p-4 rounded-xl border border-white/5 bg-white/[0.02] space-y-3">
-                        <Thermometer className="text-red-400" size={20} />
                         <code className="text-xs font-mono text-neutral-400">get_system_temperature()</code>
                         <p className="text-xs text-neutral-500">Returns Celsius (float).</p>
                     </div>
                     <div className="p-4 rounded-xl border border-white/5 bg-white/[0.02] space-y-3">
-                        <Signal className="text-blue-400" size={20} />
                         <code className="text-xs font-mono text-neutral-400">get_signal_strength()</code>
                         <p className="text-xs text-neutral-500">Returns dBm (int).</p>
                     </div>

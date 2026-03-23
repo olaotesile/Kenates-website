@@ -25,18 +25,17 @@ export default function HeartbeatPage() {
                     The Heartbeat
                 </h1>
                 <p className="text-lg text-neutral-400 leading-relaxed max-w-2xl">
-                    At the core of every Kenate robot is a deterministic <span className="text-white font-medium">C++ Kernel</span> that pulses exactly 1000 times per second.
+                    At the core of every Kenate robot is a deterministic <span className="text-white font-medium">C++ Kernel</span> that pulses exactly 1000 times per second, guaranteeing your robot doesn't take a nap while walking downstairs.
                 </p>
             </div>
 
             {/* Value Prop */}
             <div className="bg-emerald-500/10 border border-emerald-500/20 rounded-xl p-6">
                 <h4 className="text-emerald-400 font-medium mb-2 flex items-center gap-2">
-                    <Zap size={18} />
                     Millisecond Precision
                 </h4>
                 <p className="text-sm text-neutral-300 leading-relaxed text-emerald-200/70">
-                    Most programming languages suffer from "jitter"—unpredictable timing delays. For a robot moving at speed, a 50ms delay can be fatal. Kenate eliminates this by ensuring every <code className="bg-emerald-500/20 px-1 rounded text-emerald-300">on_update()</code> hit happens exactly 1ms after the last.
+                    Python suffers from "jitter"—unpredictable timing delays caused by garbage collection. In the real world, a 50ms delay means your drone just hit a tree. I fixed that. Kenate guarantees your <code className="bg-emerald-500/20 px-1 rounded text-emerald-300">on_update()</code> fires exactly every 1ms. Stop worrying about timing.
                 </p>
             </div>
 
@@ -101,7 +100,7 @@ export default function HeartbeatPage() {
                 </ul>
                 <div className="bg-red-500/10 border border-red-500/20 rounded-xl p-4">
                     <p className="text-xs text-red-300">
-                        <span className="font-bold">CRITICAL:</span> Never use <code className="font-mono">time.sleep()</code> or blocking I/O inside <code className="font-mono">on_update()</code>. This forces a permanent Tick Overrun.
+                        <span className="font-bold">CRITICAL:</span> If you use <code className="font-mono">time.sleep()</code> or blocking I/O inside <code className="font-mono">on_update()</code>, the Kernel will actively fight you. Don't do it. You are writing an atomic state, not a bash script.
                     </p>
                 </div>
             </div>

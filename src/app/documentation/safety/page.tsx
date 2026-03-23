@@ -12,18 +12,17 @@ export default function SafetyPage() {
                     Safety & Thermal
                 </h1>
                 <p className="text-lg text-neutral-400 leading-relaxed max-w-2xl">
-                    Robots are expensive. Kenate v2.3.0 introduces a kernel-level protection layer that prevents physical damage from software loops or environmental heat.
+                    Robots are basically just really expensive ways to start a fire. Kenate introduced a kernel-level protection layer so your software loops don't melt your hardware. You're welcome.
                 </p>
             </div>
 
             {/* Thermal Management */}
             <div className="space-y-6">
                 <div className="flex items-center gap-3 text-red-400">
-                    <Thermometer size={24} />
                     <h2 className="text-2xl font-semibold text-white">Thermal Management</h2>
                 </div>
                 <p className="text-neutral-400 leading-relaxed">
-                    If the motor core or processor exceeds the threshold defined in your Robot Profile (default <span className="text-white font-mono">85.0°C</span>), the Kernel triggers an immediate safety transition.
+                    If the motor core exceeds the threshold in your profile (default <span className="text-white font-mono">85.0°C</span>), the Kernel steps in immediately. I don't ask Python if it's okay, I just shut it down to save your hardware.
                 </p>
                 <div className="bg-red-500/5 border border-red-500/10 rounded-xl p-4">
                     <p className="text-xs text-red-300">
@@ -35,7 +34,6 @@ export default function SafetyPage() {
             {/* Signal Integrity */}
             <div className="space-y-6 pt-6 border-t border-white/5">
                 <div className="flex items-center gap-3 text-blue-400">
-                    <Shield size={24} />
                     <h2 className="text-2xl font-semibold text-white">Signal Integrity & RTH</h2>
                 </div>
                 <p className="text-neutral-400 leading-relaxed">
@@ -51,7 +49,7 @@ export default function SafetyPage() {
             <div className="space-y-6 pt-6 border-t border-white/5">
                 <h2 className="text-2xl font-semibold text-white">Kernel Halt</h2>
                 <p className="text-neutral-400 leading-relaxed font-mono italic text-sm">
-                    "If the logic fails entirely, the C++ Kernel kills power to all motors to prevent property damage."
+                    "If your logic fails entirely because you wrote a bad loop, the C++ Kernel literally kills power to all motors to stop your robot from destroying your property. I planned for your mistakes."
                 </p>
             </div>
 

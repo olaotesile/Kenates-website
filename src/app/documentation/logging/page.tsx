@@ -12,7 +12,7 @@ export default function LoggingPage() {
                     Logging & Black Box
                 </h1>
                 <p className="text-lg text-neutral-400 leading-relaxed max-w-2xl">
-                    Post-mission analysis is the key to robotic evolution. Kenate's <span className="text-white font-medium">Black Box</span> system logs every single tick for later replay.
+                    When your robot inevitably crashes, you need to know why instead of just guessing. Our <span className="text-white font-medium">Black Box</span> system logs literally everything so you can actually fix it.
                 </p>
             </div>
 
@@ -21,7 +21,7 @@ export default function LoggingPage() {
                 <h2 className="text-2xl font-semibold text-white font-mono">The Black Box Engine</h2>
                 <div className="space-y-4 text-neutral-400 leading-relaxed">
                     <p>
-                        The C++ Kernel automatically logs high-frequency binary data to the disk. In the event of a power loss, Kenate ensures that mission data is preserved in the <span className="text-emerald-400 font-mono">.kenate_logs</span> directory.
+                        The C++ Kernel automatically logs all your binary data to disk. Even if you completely blow a fuse and drop power, I save your data in the <span className="text-emerald-400 font-mono">.kenate_logs</span> directory. I planned for your mistakes.
                     </p>
                     <div className="bg-emerald-500/5 border border-emerald-500/10 rounded-xl p-4">
                         <p className="text-xs text-emerald-300 italic">

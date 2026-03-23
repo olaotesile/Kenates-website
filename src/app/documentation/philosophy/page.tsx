@@ -12,7 +12,8 @@ export default function PhilosophyPage() {
                     Philosophy
                 </h1>
                 <p className="text-lg text-neutral-400 leading-relaxed max-w-2xl">
-                    Kenate is built on one core belief: <span className="text-white font-medium">robotics code should be modular, not monolithic.</span> We replace scripts with specialist behaviors.
+                    So why did I make this? Well, isn't it obvious enough yet!? Programming robots is hell!!<br /><br />
+                    On a more serious note, Kenate is built on one core belief: <span className="text-white font-medium">robotic code should be modular, not a monolithic disaster.</span> I replace your chaotic scripts with highly-specialized behaviors.
                 </p>
             </div>
 
@@ -21,12 +22,12 @@ export default function PhilosophyPage() {
                 <h2 className="text-2xl font-semibold text-white">The Atomic State Paradigm</h2>
                 <div className="space-y-4 text-neutral-400 leading-relaxed">
                     <p>
-                        Kenate represents a paradigm shift. It is the first framework to treat robotic behavior as a set of isolated, high-performance modules. By replacing "scripts" with <span className="text-emerald-400 font-mono">"Atomic States,"</span> Kenate allows for the creation of autonomous systems that are modular by design and impossible to break by accident.
+                        Let's be real: putting all your robot's logic into one giant file is a great way to guarantee a catastrophic failure. Kenate forces you to be better. I treat robotic behavior as a set of isolated, high-performance modules. By replacing "scripts" with <span className="text-emerald-400 font-mono">"Atomic States,"</span> you get an autonomous system that's modular by design and nearly impossible to break by accident. (Though I'm sure someone will try).
                     </p>
                     <div className="bg-emerald-500/5 border border-emerald-500/10 rounded-xl p-6">
                         <h4 className="text-emerald-400 font-medium mb-2">Definition: Atomic State</h4>
                         <p className="text-sm">
-                            A behavioral module that performs <span className="text-white">exactly one task perfectly</span>. Never build a State that does two major jobs. If a robot needs to move and clean, build two states.
+                            A behavioral module that performs <span className="text-white">exactly one task perfectly</span>. Stop building States that try to do everything. If your robot needs to move and grab an object, that's two states. Simple.
                         </p>
                     </div>
                 </div>
@@ -36,7 +37,7 @@ export default function PhilosophyPage() {
             <div className="space-y-6 pt-6 border-t border-white/5">
                 <h2 className="text-2xl font-semibold text-white">Why Kenate?</h2>
                 <p className="text-neutral-400 leading-relaxed">
-                    Traditional robotic software relies on monolithic control loops. As systems evolve, these become "Spaghetti Logic"—endless chains of if-else statements. Kenate enforces a disciplined lifecycle: <span className="text-white font-medium">Init, Run, Analyze.</span>
+                    Because traditional robotic software rapidly devolves into "Spaghetti Logic"—endless chains of if-else statements that make you want to rip your hair out when a sensor glitches in production. Kenate enforces a disciplined lifecycle: <span className="text-white font-medium">Init, Run, Analyze.</span> It's the grown-up way to build robots.
                 </p>
             </div>
 
@@ -46,15 +47,15 @@ export default function PhilosophyPage() {
                 <div className="space-y-4">
                     <PrincipleCard
                         title="Modularity"
-                        description="Each behavior is a self-contained State class. You can add, remove, or modify states without affecting others. It's like Lego, but for robot brains."
+                        description="Each behavior is a self-contained State class. Add, remove, or modify states without breaking the others. It's like Lego, but for robot brains."
                     />
                     <PrincipleCard
                         title="Hybrid Performance"
-                        description="Write in easy Python; execute in high-speed C++. The 1000Hz Kernel ensures precise timing for smooth robot motion."
+                        description="Write in comfortable Python, execute in blazing-fast C++. The 1000Hz Kernel does the heavy lifting so your robot moves smoothly instead of violently jerking around."
                     />
                     <PrincipleCard
                         title="Determinism"
-                        description="The Heartbeat guarantees your code runs at exact intervals. No more 'jitter' or missed sensor readings. Predictable is professional."
+                        description="The Heartbeat guarantees your code runs exactly when it should. No more 'jitter' or randomly missed sensor readings. Predictable is professional."
                     />
                 </div>
             </div>
@@ -63,7 +64,7 @@ export default function PhilosophyPage() {
             <div className="space-y-4">
                 <h2 className="text-2xl font-semibold text-white">The Watchdog Pattern</h2>
                 <p className="text-neutral-400 leading-relaxed">
-                    For production-grade autonomy, Euretix Labs recommends the <span className="text-yellow-400">Watchdog</span> pattern.
+                    For systems that actually need to survive in the real world, you use the <span className="text-yellow-400">Watchdog</span> pattern. Don't build robots without this unless you enjoy watching them catch fire.
                 </p>
                 <div className="rounded-lg border border-white/10 bg-[#0A0A0A] p-4">
                     <pre className="font-mono text-sm text-neutral-300">

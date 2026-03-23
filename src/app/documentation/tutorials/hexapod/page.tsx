@@ -12,8 +12,8 @@ export default function HexapodTutorial() {
                     Hexapod Walking Gait
                 </h1>
                 <div className="flex items-center gap-4 text-neutral-400 text-sm">
-                    <span className="flex items-center gap-1"><Cpu size={14} /> Tripod Pattern</span>
-                    <span className="flex items-center gap-1"><Zap size={14} /> Biomimetic Logic</span>
+                    <span className="flex items-center gap-1">Tripod Pattern</span>
+                    <span className="flex items-center gap-1">Biomimetic Logic</span>
                 </div>
             </div>
 
@@ -21,7 +21,7 @@ export default function HexapodTutorial() {
             <div className="bg-neutral-900/50 border border-neutral-800 rounded-2xl p-8 space-y-4">
                 <h2 className="text-xl font-semibold text-white">The Challenge</h2>
                 <p className="text-neutral-400 leading-relaxed italic">
-                    "Welcome to the big leagues! Coordinating 6 legs at once is one of the hardest things in robotics. But don't worry, we're going to do it 'to the bone.'"
+                    "Coordinating 6 legs at once is usually a nightmare. Most people write hundreds of <span className="font-mono text-emerald-400">if</span> statements and end up with a twitchy mess. I'm going to do it with math, because math actually works."
                 </p>
             </div>
 
@@ -30,9 +30,10 @@ export default function HexapodTutorial() {
                 <h3 className="text-2xl font-bold text-white flex items-center gap-3">
                     <span className="text-emerald-500">01.</span> Installation
                 </h3>
-                <p className="text-neutral-400">Before we do anything, let's get the engine installed on your machine. This gives us the high-speed "Heartbeat" we need for smooth walking.</p>
+                <p className="text-neutral-400">Before I do anything, let's get the engine installed on your machine. This gives me the high-speed "Heartbeat" I need for smooth walking.</p>
                 <div className="bg-[#0A0A0A] border border-white/10 rounded-xl p-4 font-mono text-sm text-emerald-400">
-                    $ pip install kenate --no-cache-dir
+                    $ git clone [repo_link_coming_soon]<br />
+                    $ cd kenate
                 </div>
             </div>
 
@@ -75,7 +76,7 @@ import time
 
 class HexapodWalking(BaseState):
     """
-    RATIONALE: We don't use 'if' statements to walk. We use Sine waves. 
+    RATIONALE: I don't use 'if' statements to walk. I use Sine waves. 
     It makes the robot move like a living creature instead of a stuttering toy.
     """
     def on_enter(self):
@@ -136,22 +137,22 @@ def main():
 
             {/* To the Bone Breakdown */}
             <div className="space-y-8">
-                <h3 className="text-2xl font-bold text-white flex items-center gap-3">
-                    <span className="text-emerald-500"><Info size={24} /></span> Breakdown: To The Bone
+                <h3 className="text-2xl font-bold text-white mb-4">
+                    Breakdown: To The Bone
                 </h3>
 
                 <div className="space-y-6">
                     <div className="space-y-3">
                         <h4 className="text-lg font-semibold text-emerald-400 font-mono underline decoration-emerald-500/30 underline-offset-4">Sine Wave Rationale</h4>
                         <p className="text-neutral-400 leading-relaxed text-sm">
-                            We don't use boolean gates for motion. Using <code className="text-white font-mono">math.sin()</code> ensures that velocity ramps up and down naturally at the peak and trough of every step. This prevents mechanical stress on the plastic servo gears and eliminates "shaking."
+                            I don't use boolean gates for motion. I use <code className="text-white font-mono">math.sin()</code> because physics exists. Jumping instantly from speed 0 to 100 will strip your cheap plastic servo gears in about three seconds. A Sine wave naturally ramps acceleration up and down. You're welcome.
                         </p>
                     </div>
 
                     <div className="space-y-3">
                         <h4 className="text-lg font-semibold text-blue-400 font-mono underline decoration-blue-500/30 underline-offset-4">The Cycle Clock</h4>
                         <p className="text-neutral-400 leading-relaxed text-sm">
-                            Because <code className="text-white font-mono">on_update()</code> is called every 1ms by the C++ Kernel, adding <span className="text-white">0.001</span> to our clock isn't just a guess—it is exactly one millisecond of real-world time.
+                            Because <code className="text-white font-mono">on_update()</code> is fired precisely every 1ms by the C++ Kernel, adding <span className="text-white">0.001</span> to our clock isn't a hope and a prayer—it's exactly one millisecond of real-world time. No jitter, no drift.
                         </p>
                     </div>
                 </div>
@@ -164,7 +165,7 @@ def main():
                     When you're ready to see the legs move for real, copy this file onto your robot (SSH/Git). Change the <code className="text-white">port</code> from <span className="text-emerald-400">"SIMULATION"</span> to <span className="text-blue-400">"GPIO"</span> or <span className="text-blue-400">"/dev/ttyUSB0"</span>.
                 </p>
                 <div className="flex items-center gap-4 p-4 bg-black/40 rounded-xl border border-white/5 font-mono text-xs text-neutral-500">
-                    <Activity size={16} className="text-emerald-500" /> Once you run the script, the C++ Heartbeat takes over and the hexapod stands up!
+                    Once you run the script, the C++ Heartbeat takes over and the hexapod stands up!
                 </div>
             </div>
 

@@ -25,7 +25,7 @@ export default function MotorPage() {
                     Motor API
                 </h1>
                 <p className="text-lg text-neutral-400 leading-relaxed max-w-2xl">
-                    The <code className="text-white font-medium">MotorInterface</code> provides standard commands for all actuators, from simple DC motors to high-precision servos.
+                    The <code className="text-white font-medium">MotorInterface</code> gives you standard commands for all actuators, meaning you don't have to write custom bit-banging garbage just to make a wheel spin. You're welcome.
                 </p>
             </div>
 
@@ -33,7 +33,7 @@ export default function MotorPage() {
             <div className="space-y-12">
                 <div className="space-y-4">
                     <h2 className="text-2xl font-semibold text-white font-mono">kenate.BaseState()</h2>
-                    <p className="text-neutral-400">The foundation for all custom behaviors. These methods are available within any state via <code className="text-emerald-400">self</code>.</p>
+                    <p className="text-neutral-400">The foundation for your behaviors. I give you these methods out of the box so you don't spend three days reinventing the wheel.</p>
 
                     <div className="grid gap-4">
                         <APIMethod
@@ -83,7 +83,7 @@ export default function MotorPage() {
             <div className="space-y-4">
                 <h2 className="text-2xl font-semibold text-white">The Mock Motor</h2>
                 <p className="text-neutral-400 leading-relaxed">
-                    For workstation development, use <code className="text-emerald-400 bg-emerald-500/10 px-1 rounded">kenate.MockMotor()</code>. It inherits all methods from the standard interface but simulates the hardware behavior entirely in software.
+                    For when you want to write code from your couch instead of the lab. <code className="text-emerald-400 bg-emerald-500/10 px-1 rounded">kenate.MockMotor()</code> simulates the hardware perfectly in software, so you don't need the actual robot just to test a loop.
                 </p>
                 <div className="rounded-lg border border-white/10 bg-[#0A0A0A] p-4">
                     <pre className="font-mono text-sm text-neutral-300">

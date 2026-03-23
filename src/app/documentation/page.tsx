@@ -10,32 +10,26 @@ export default function DocumentationPage() {
                 <h1 className="text-4xl md:text-5xl font-bold tracking-tight text-white mb-6">
                     Kenate Robotics Framework
                 </h1>
-                <p className="text-lg text-neutral-400 leading-relaxed max-w-3xl">
-                    Architected by <span className="text-white font-medium">Euretix Labs</span>, Kenate represents a paradigm shift in robotics. It is the first framework to treat robotic behavior as a set of isolated, high-performance modules.
-                </p>
+                    Okay so this is the part where i'm supposed to become all serious and get professional but know what..nahhh
+                    <br/><br/>
+                    So Kenate is a high-performance framework that saves you from yourself, treating robotic behavior as isolated modules so your code actually works.
             </div>
 
             {/* Unique Value Props */}
             <div className="grid md:grid-cols-2 gap-6">
                 <div className="bg-neutral-900/50 border border-neutral-800 rounded-xl p-6 space-y-4">
-                    <div className="w-10 h-10 rounded-lg bg-emerald-500/10 flex items-center justify-center border border-emerald-500/20">
-                        <Zap size={20} className="text-emerald-400" />
-                    </div>
                     <div>
-                        <h4 className="text-lg font-semibold text-white mb-2">1000Hz Deterministic Heartbeat</h4>
+                        <h4 className="text-lg font-semibold text-white mb-2">Runs on a 1000Hz C++ Engine</h4>
                         <p className="text-sm text-neutral-400 leading-relaxed">
-                            Kenate uses a dedicated C++ Kernel that pulses exactly 1000 times per second. This 1-millisecond accuracy eliminates "jitter," providing the heartbeat required for professional-grade motion control.
+                            Because the real world doesn't wait for garbage collection. Our dedicated C++ Engine runs exactly 1000 times a second. It's completely flawless and so fast that even some Series Y robotics companies aren't this good yet.
                         </p>
                     </div>
                 </div>
                 <div className="bg-neutral-900/50 border border-neutral-800 rounded-xl p-6 space-y-4">
-                    <div className="w-10 h-10 rounded-lg bg-blue-500/10 flex items-center justify-center border border-blue-500/20">
-                        <Terminal size={20} className="text-blue-400" />
-                    </div>
                     <div>
-                        <h4 className="text-lg font-semibold text-white mb-2">Hybrid Kernel Exclusivity</h4>
+                        <h4 className="text-lg font-semibold text-white mb-2">Write Python, Run C++</h4>
                         <p className="text-sm text-neutral-400 leading-relaxed">
-                            Write high-level logic in Python while maintaining the hardcore performance of C++. The Engine handles memory management, high-speed sensor polling, and motor timing automatically.
+                            Since a lot of people like Python already, I made it so you just keep writing Python, but it remains incredibly fast and efficient because the underlying C++ engine handles the heavy lifting. You're welcome.
                         </p>
                     </div>
                 </div>
@@ -43,13 +37,13 @@ export default function DocumentationPage() {
 
             {/* The Evolution */}
             <div className="space-y-6">
-                <h2 className="text-2xl font-semibold text-white">The Evolution of Robotic Programming</h2>
+                <h2 className="text-2xl font-semibold text-white">Why Does This Exist?</h2>
                 <div className="space-y-4 text-neutral-400 leading-relaxed">
                     <p>
-                        The Kenate framework was developed by Euretix Labs in 2025 as a direct response to the fragility of traditional robotic software. For decades, developers relied on monolithic control loops dominated by <span className="text-red-400">"Spaghetti Logic"</span>, endless chains of if-else statements that became impossible to debug as systems evolved.
+                        Because traditional robotic software is fragile garbage. For decades, developers relied on monolithic control loops dominated by <span className="text-red-400">"Spaghetti Logic"</span>, endless chains of if-else statements that became impossible to debug the second the system actually did something complicated.
                     </p>
                     <p>
-                        Kenate represents a paradigm shift. It is the first framework to treat robotic behavior as a set of isolated, high-performance modules. By replacing "scripts" with <span className="text-emerald-400 font-mono">"states,"</span> Kenate allows for the creation of autonomous systems that are modular by design and impossible to break by accident.
+                        Kenate is the fix. By replacing messy "scripts" with self-contained <span className="text-emerald-400 font-mono">"States,"</span> you get the power to create autonomous systems that are modular by design—making it practically impossible to break your robot by accident.
                     </p>
                 </div>
             </div>
@@ -59,19 +53,16 @@ export default function DocumentationPage() {
                 <h2 className="text-2xl font-semibold text-white">Features at a Glance</h2>
                 <div className="grid md:grid-cols-3 gap-4">
                     <FeatureCard
-                        icon={<Layers className="text-purple-400" />}
                         title="Atomic State Design"
-                        description="Never build a State that does two major jobs. If a robot needs to move and clean, build two states."
+                        description="Don't build a State that does two major jobs. If a robot needs to move and clean, build two states. It's not that hard."
                     />
                     <FeatureCard
-                        icon={<Cpu className="text-yellow-400" />}
                         title="Hardware Abstraction"
-                        description="Switch hardware platforms by changing one line in your config, not your Python code."
+                        description="Swap out a motor platform by changing one line in your config instead of rewriting your entire codebase. You're welcome."
                     />
                     <FeatureCard
-                        icon={<ArrowRight className="text-blue-400" />}
                         title="Enterprise Grade"
-                        description="Optimized for mission-critical autonomy, with built-in safety and thermal watchdogs."
+                        description="Built-in thermal and safety watchdogs, because robots are expensive and melting them is bad."
                     />
                 </div>
             </div>
@@ -118,12 +109,9 @@ export default function DocumentationPage() {
     );
 }
 
-function FeatureCard({ icon, title, description }: { icon: React.ReactNode; title: string; description: string }) {
+function FeatureCard({ title, description }: { title: string; description: string }) {
     return (
         <div className="p-5 rounded-xl border border-white/5 bg-white/[0.02]">
-            <div className="w-10 h-10 rounded-lg bg-white/5 flex items-center justify-center mb-3">
-                {icon}
-            </div>
             <h3 className="font-medium text-white mb-1">{title}</h3>
             <p className="text-sm text-neutral-400">{description}</p>
         </div>

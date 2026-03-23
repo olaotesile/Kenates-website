@@ -12,7 +12,7 @@ export default function HardwarePage() {
                     Robot Profiles
                 </h1>
                 <p className="text-lg text-neutral-400 leading-relaxed max-w-2xl">
-                    Kenate is a universal framework. To ensure compatibility with any machine, we separate the <span className="text-white font-medium">Brain Logic</span> from the <span className="text-white font-medium">Body Data</span>.
+                    Kenate is universal. To ensure it actually works on any machine, I aggressively separate the <span className="text-white font-medium">Brain Logic</span> from the <span className="text-white font-medium">Body Data</span>. Because hardcoding pin numbers into your state machine is a rookie mistake.
                 </p>
             </div>
 
@@ -20,7 +20,7 @@ export default function HardwarePage() {
             <div className="space-y-4">
                 <h2 className="text-2xl font-semibold text-white">What is a Robot Profile?</h2>
                 <p className="text-neutral-400 leading-relaxed">
-                    A Robot Profile (e.g., <code className="bg-white/5 px-1 rounded text-blue-400">drone_v1.json</code>) is a blueprint of your specific hardware. The Kenate Engine reads this blueprint at startup to understand its physical limits and safety thresholds.
+                    A Robot Profile is the literal blueprint of your hardware. The Engine reads this at startup so it knows exactly how far it can push the motors before they physically melt.
                 </p>
                 <div className="grid md:grid-cols-2 gap-4">
                     <div className="p-4 rounded-xl border border-white/5 bg-white/[0.02] space-y-2">

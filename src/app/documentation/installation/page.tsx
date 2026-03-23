@@ -15,7 +15,7 @@ export default function InstallationPage() {
     };
 
     const steps = [
-        { cmd: "git clone https://github.com/olaotesile/kenate.git", desc: "Download the source code" },
+        { cmd: "git clone [repo_link_coming_soon]", desc: "Download the source code" },
         { cmd: "cd kenate", desc: "Enter the project folder" },
         { cmd: "mkdir build && cd build", desc: "Create the build directory" },
         { cmd: 'cmake -G "Visual Studio 17 2022" ..', desc: "Configure the build" },
@@ -31,21 +31,16 @@ export default function InstallationPage() {
                     Installation
                 </h1>
                 <p className="text-lg text-neutral-400 leading-relaxed max-w-2xl">
-                    Kenate requires a one-time build step to install the <span className="text-white font-medium">high-speed Hardware Bridge</span>. This ensures zero-lag communication between Python and electronics.
+                    Kenate requires a one-time build step because Python alone is too slow to run a robot without crashing it into a wall. This installs the <span className="text-white font-medium">high-speed Hardware Bridge</span>, ensuring zero-lag communication.
                 </p>
             </div>
 
             {/* Why Build? */}
             <div className="bg-blue-500/10 border border-blue-500/20 rounded-xl p-6 flex gap-4">
-                <div className="flex-shrink-0">
-                    <div className="w-8 h-8 rounded-full bg-blue-500/10 flex items-center justify-center border border-blue-500/20">
-                        <Cpu size={16} className="text-blue-400" />
-                    </div>
-                </div>
                 <div className="space-y-2">
                     <h4 className="text-sm font-medium text-blue-400">Why is this step necessary?</h4>
                     <p className="text-sm text-neutral-400 leading-relaxed">
-                        Unlike simple scripting, Kenate installs a 1000Hz Kernel. Without this build step, your robot would suffer from "digital stutter," making smooth control impossible.
+                        Because Python's garbage collector will randomly pause your robot's brain for 50 milliseconds, and in the real world, that means your robot just fell down some stairs. We build a 1000Hz C++ Kernel so that doesn't happen.
                     </p>
                 </div>
             </div>
@@ -57,10 +52,10 @@ export default function InstallationPage() {
                     Install Core Framework
                 </h2>
                 <p className="text-neutral-400 leading-relaxed">
-                    Kenate is a globally distributed system available via the PyPI registry. Install the framework and the global CLI tool using pip.
+                    Kenate is open source. Don't bother with pip, just clone it and run directly from the repo because that's what real developers do.
                 </p>
                 <div className="rounded-lg border border-white/10 bg-[#0A0A0A] p-4 text-sm font-mono text-neutral-300">
-                    $ pip install kenate --no-cache-dir
+                    $ git clone [repo_link_coming_soon]
                 </div>
             </div>
 
@@ -70,7 +65,7 @@ export default function InstallationPage() {
                     The "God Command"
                 </h2>
                 <p className="text-neutral-400 leading-relaxed">
-                    The <code className="text-emerald-400 bg-emerald-500/10 px-1 rounded font-mono">kenate</code> command is your entry point to the entire ecosystem. It handles everything from scaffolding to deep telemetry analysis.
+                    The <code className="text-emerald-400 bg-emerald-500/10 px-1 rounded font-mono">kenate</code> command isn't just a CLI; it's practically the only tool you need. It handles everything from scaffolding a professional workspace to deep telemetry analysis so you can figure out exactly why your robot failed.
                 </p>
                 <div className="grid gap-4">
                     <div className="p-4 rounded-xl border border-white/5 bg-white/[0.02] flex items-start gap-4">

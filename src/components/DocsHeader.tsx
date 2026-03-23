@@ -79,10 +79,9 @@ export function DocsHeader({ onOpenMobileMenu, isMobileMenuOpen }: DocsHeaderPro
                     <div className="h-4 w-[1px] bg-white/10 hidden lg:block" />
 
                     <a
-                        href="https://github.com/olaotesile/Kenates-website"
-                        target="_blank"
-                        rel="noopener noreferrer"
+                        href="#"
                         className="text-neutral-400 hover:text-white transition-colors"
+                        title="Repo link coming soon"
                     >
                         <Github size={20} />
                     </a>
