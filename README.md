@@ -1,66 +1,54 @@
 # Kenate Landing Page
 
-<div align="center">
-  <h3>The Modern Standard for Robotics Development</h3>
-  <p>A high-performance, visually stunning landing page for Kenate - the next-generation robotics framework.</p>
-</div>
+This repo is the **official landing page** for Kenate — a robotics framework built around a fixed‑rate engine, state‑driven logic, and a host + MCU workflow.
 
-## Overview
+If you’re just trying to run the site, skip the robotics part and follow the dev steps below.
 
-This project is the official landing page for **Kenate**, a declarative and reactive framework designed to simplify robotics programming. Built with **Next.js 16** and **Tailwind CSS**, it features a modern, dark-themed aesthetic with advanced interactive elements like 3D globes, floating docks, and code comparisons.
+---
 
+## What This Site Is
+
+It’s a Next.js + Tailwind landing page with:
+- cinematic visuals
+- interactive components
+- documentation views (including the Masterclass doc)
 
 ## Tech Stack
 
--   **Framework**: [Next.js 16](https://nextjs.org/) (App Router)
--   **Styling**: [Tailwind CSS v4](https://tailwindcss.com/)
--   **Animations**: [Framer Motion](https://www.framer.com/motion/)
--   **3D Graphics**: [Three.js](https://threejs.org/) & [React Three Fiber](https://docs.pmnd.rs/react-three-fiber)
--   **Icons**: [Lucide React](https://lucide.dev/)
--   **Language**: TypeScript. Please don't ask me why
+- **Framework**: Next.js (App Router)
+- **Styling**: Tailwind CSS
+- **Animations**: Framer Motion
+- **3D**: Three.js + React Three Fiber
+- **Language**: TypeScript (yes, we enjoy pain)
 
-## Getting Started
+---
 
-Clone the repository and install dependencies to get started locally.
+## Local Development
 
 ```bash
-# Clone the repository
 git clone https://github.com/olaotesile/Kenates-website.git
-
-# Navigate to the project directory
 cd kenatelandingpage
-
-# Install dependencies
 npm install
-
-# Start the development server
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open `http://localhost:3000`
 
-## Project Structure
+---
 
-```
-src/
-├── app/              # Next.js App Router pages and layouts
-├── components/       # Reusable UI components
-│   ├── ui/           # Low-level UI primitives (Globe, Dock, etc.)
-│   └── ...           # feature components (Hero, Navbar)
-├── data/             # Static data files (Globe coordinates)
-└── lib/              # Utility functions (cn, etc.)
-```
+## Where the Docs Live
+
+- Masterclass: `KENATE_MASTERCLASS.md`
+- UI walkthrough entry: `src/app/documentation/tutorials/hexapod/page.tsx`
+
+---
 
 ## Contributing
 
-Contributions are welcome! Please feel free to submit a Pull Request.
+Pull requests welcome. Keep the tone sharp and the experience smooth.
 
-1.  Fork the project
-2.  Create your feature branch (`git checkout -b feature/AmazingFeature`)
-3.  Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4.  Push to the branch (`git push origin feature/AmazingFeature`)
-5.  Open a Pull Request
+---
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+MIT License. Do your thing.
