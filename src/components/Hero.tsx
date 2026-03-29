@@ -6,6 +6,7 @@ import Link from "next/link";
 import { MacbookScroll } from "@/components/ui/macbook-scroll";
 import { ShootingStars } from "@/components/ui/shooting-stars";
 import { StarsBackground } from "@/components/ui/stars-background";
+import { ParticleText } from "@/components/ui/particle-text";
 
 export function Hero() {
     return (
@@ -31,7 +32,21 @@ export function Hero() {
                     </div>
 
                     <h1 className="text-6xl md:text-6xl lg:text-7xl font-bold tracking-tighter text-white mb-6 relative">
-                        <span className="relative z-10 mix-blend-difference">React, but for</span><br />
+                        <span className="relative z-10 mix-blend-difference">
+                            <ParticleText
+                                text="React"
+                                className="text-6xl md:text-6xl lg:text-7xl font-bold tracking-tighter"
+                                particleColor="rgba(255,255,255,0.95)"
+                                spacing={4}
+                                repelRadius={90}
+                                repelStrength={0.22}
+                                particleSize={0.7}
+                                padding={40}
+                                baseOpacity={0}
+                            />
+                            <span className="ml-3">, but for</span>
+                        </span>
+                        <br />
                         <span className="text-neutral-500 relative z-10">robotics</span>
                     </h1>
 

@@ -15,7 +15,7 @@ export default function InstallationPage() {
     };
 
     const steps = [
-        { cmd: "git clone [repo_link_coming_soon]", desc: "Download the source code" },
+        { cmd: "git clone https://github.com/otesh-o/Kenate.git", desc: "Download the source code" },
         { cmd: "cd kenate", desc: "Enter the project folder" },
         { cmd: "mkdir build && cd build", desc: "Create the build directory" },
         { cmd: 'cmake -G "Visual Studio 17 2022" ..', desc: "Configure the build" },
@@ -55,7 +55,7 @@ export default function InstallationPage() {
                     Kenate is open source. Don't bother with pip, just clone it and run directly from the repo because that's what real developers do.
                 </p>
                 <div className="rounded-lg border border-white/10 bg-[#0A0A0A] p-4 text-sm font-mono text-neutral-300">
-                    $ git clone [repo_link_coming_soon]
+                    $ git clone https://github.com/otesh-o/Kenate.git
                 </div>
             </div>
 

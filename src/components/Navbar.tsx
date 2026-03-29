@@ -27,7 +27,7 @@ export function Navbar() {
                 </div>
 
                 <div className="flex items-center gap-4">
-                    <Link href="#" className="p-2 hover:bg-white/5 rounded-full transition-colors" title="Repo link coming soon">
+                    <Link href="https://github.com/otesh-o/Kenate" className="p-2 hover:bg-white/5 rounded-full transition-colors" title="GitHub Repo">
                         <Github className="h-5 w-5" />
                     </Link>
                     <button className="bg-white text-black px-5 py-2 rounded-full text-sm font-semibold hover:bg-white/90 transition-colors">

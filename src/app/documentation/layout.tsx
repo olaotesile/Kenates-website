@@ -132,10 +132,14 @@ export default function DocumentationLayout({
                             <Home size={16} />
                             Back to Home
                         </Link>
-                        <span className="flex items-center gap-3 px-2 py-2 text-sm text-neutral-500 cursor-not-allowed" title="Repo link coming soon">
+                        <Link
+                            href="https://github.com/otesh-o/Kenate"
+                            className="flex items-center gap-3 px-2 py-2 text-sm text-neutral-400 hover:text-white transition-colors"
+                            title="GitHub Repo"
+                        >
                             <Code2 size={16} />
-                            GitHub Repo (Coming Soon)
-                        </span>
+                            GitHub Repo
+                        </Link>
                     </div>
                 </aside>
 

@@ -32,7 +32,7 @@ export default function HexapodTutorial() {
                 </h3>
                 <p className="text-neutral-400">Before I do anything, let's get the engine installed on your machine. This gives me the high-speed "Heartbeat" I need for smooth walking.</p>
                 <div className="bg-[#0A0A0A] border border-white/10 rounded-xl p-4 font-mono text-sm text-emerald-400">
-                    $ git clone [repo_link_coming_soon]<br />
+                        $ git clone https://github.com/otesh-o/Kenate.git<br />
                     $ cd kenate
                 </div>
             </div>

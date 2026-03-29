@@ -32,7 +32,7 @@ export default function DeliveryTutorial() {
                         <span className="text-emerald-500">01.</span> Install Engine
                     </h3>
                     <div className="bg-black/40 rounded-xl p-3 font-mono text-xs text-emerald-400 border border-white/5 disabled select-none">
-                        $ git clone [repo_link_coming_soon]<br />
+                        $ git clone https://github.com/otesh-o/Kenate.git<br />
                         $ cd kenate
                     </div>
                 </div>

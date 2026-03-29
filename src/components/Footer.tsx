@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { Github } from "lucide-react";
 import Link from "next/link";
@@ -14,12 +14,12 @@ export function Footer() {
                     viewport={{ once: true }}
                 >
                     <Link
-                        href="#"
+                        href="https://github.com/otesh-o/Kenate"
                         className="group relative inline-flex items-center gap-2 md:gap-3 px-6 py-3 md:px-8 md:py-4 bg-white/5 hover:bg-white/10 border border-white/10 rounded-full transition-all duration-300 hover:scale-105"
-                        title="Repo link coming soon"
+                        title="GitHub Repo"
                     >
                         <Github className="h-4 w-4 md:h-6 md:w-6 text-white group-hover:text-primary transition-colors" />
-                        <span className="font-semibold text-sm md:text-lg text-white">Repo link coming soon</span>
+                        <span className="font-semibold text-sm md:text-lg text-white">GitHub Repo</span>
                     </Link>
                 </motion.div>
 
@@ -30,3 +30,4 @@ export function Footer() {
         </footer>
     );
 }
+
